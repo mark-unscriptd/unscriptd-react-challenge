@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 
 function PhotoDetails({ data, onClickSave }) {
+   let id = data.id
 	return (
 		data && (
 			<Fragment>
@@ -55,10 +56,9 @@ function PhotoDetails({ data, onClickSave }) {
 							const elements = form.elements;
 							const title = elements.title.value;
 							const caption = elements.caption.value;
+							const artist = elements.artist.value;
 
-							console.log(title, caption);
-
-							// onClickSave({ title, caption });
+							onClickSave({ title, caption, artist, id });
 						}}
 					>
 						<div className="editfield">

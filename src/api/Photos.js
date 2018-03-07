@@ -11,3 +11,9 @@ export function listPhotos() {
       return res.data;
    });
 }
+
+export function updatePhoto(id, data) {
+   return api.patch(`/images/${id}`, data)
+     .then(res => res.data)
+ }
+ 

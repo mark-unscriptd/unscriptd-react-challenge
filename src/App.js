@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { listPhotos } from "./api/Photos";
+import { listPhotos, updatePhoto } from "./api/Photos";
 import { Search } from "./components/Svg";
 import PhotoDetails from "./components/PhotoDetails";
 
@@ -21,6 +21,27 @@ class App extends Component {
 			});
 	}
 
+	onClickSave = editedPhotoData => {
+		updatePhoto(editedPhotoData.id, editedPhotoData)
+			.then(updatedPhoto => {
+				this.setState(prevState => {
+					const newData = prevState.data.map(m => {
+						if (m.id === updatedPhoto.id) {
+							return updatedPhoto;
+						} else {
+							return m;
+						}
+					});
+					return {
+						data: newData
+					};
+				});
+			})
+			.catch(error => {
+				this.setState({ error });
+			});
+	};
+
 	render() {
 		const { data, error } = this.state;
 		return (
@@ -35,12 +56,19 @@ class App extends Component {
 					</header>
 
 					{/* loading error message */}
-					{error && <h2 id="error">Error loding images! {error.message}</h2>}
+					{error && <h2 id="error">{error.message}</h2>}
 
 					<Switch>
 						{data &&
-							data.map(m => {
-								return <Route key={m.id} path={`/${m.id}`} exact render={() => <PhotoDetails data={m} />} />;
+							data.map(data => {
+								return (
+									<Route
+										key={data.id}
+										path={`/${data.id}`}
+										exact
+										render={() => <PhotoDetails data={data} onClickSave={this.onClickSave} />}
+									/>
+								);
 							})}
 
 						<Route
@@ -49,15 +77,15 @@ class App extends Component {
 							render={() => (
 								<div className="flex-container">
 									{data &&
-										data.map(m => {
+										data.map(data => {
 											return (
-												<Link to={`/${m.id}`} key={m.id}>
+												<Link to={`/${data.id}`} key={data.id}>
 													<img
 														className="thumb"
-														title={m.title}
-														src={m.display_sizes[2].uri}
-														alt={m.artist}
-														key={m.id}
+														title={data.title}
+														src={data.display_sizes[2].uri}
+														alt={data.artist}
+														key={data.id}
 													/>
 												</Link>
 											);
