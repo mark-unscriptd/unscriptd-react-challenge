@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { listPhotos } from "./api/Photos";
 import { Search } from "./components/Svg";
+import PhotoDetails from './components/PhotoDetails'
 
 class App extends Component {
 	state = {
@@ -44,57 +45,7 @@ class App extends Component {
 										path={`/${m.id}`}
 										exact
 										render={() => (
-											<Fragment>
-												<figure style={{ textAlign: "center" }}>
-													<img className="large" src={m.display_sizes[0].uri} alt={m.artist} key={m.id} />
-												</figure>
-												<div className="info-container">
-													<table>
-														<tr>
-															<td>
-																<p>Title</p>
-															</td>
-															<td>
-																<p>{m.title}</p>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<p>Caption</p>
-															</td>
-															<td>
-																<p>{m.caption}</p>
-															</td>
-														</tr>
-														<tr>
-															<td>
-																<p>Artist</p>
-															</td>
-															<td>
-																<p>{m.artist}</p>
-															</td>
-														</tr>
-													</table>
-
-													<span className="cursor"
-														onClick={() => {
-															alert("hey");
-														}}
-													>
-														[Edit]
-													</span>
-
-													<div className="editfield">
-														<h2>Edit data</h2>
-														<p>Title</p>
-														<input type="text" className="mb-2" defaultValue={m.title} />
-														<p>Caption</p>
-														<textarea className="mb-2" defaultValue={m.caption} />
-														<p>Artist</p>
-														<input type="text" className="mb-2" defaultValue={m.artist} />
-													</div>
-												</div>
-											</Fragment>
+                                 <PhotoDetails data={m}/>
 										)}
 									/>
 								);
