@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { listPhotos } from "./api/Photos";
 import { Search } from "./components/Svg";
-import PhotoDetails from './components/PhotoDetails'
+import PhotoDetails from "./components/PhotoDetails";
 
 class App extends Component {
 	state = {
@@ -28,7 +28,7 @@ class App extends Component {
 				<div className="App">
 					<header className="header">
 						<Link to="/">
-							<h1 className="h1 text-center">Welcome to the World of Patrick Smith</h1>
+							<h1 className="h1 text-center">My awesome moments</h1>
 						</Link>
 						<input type="text" placeholder="search" />
 						<Search />
@@ -40,35 +40,31 @@ class App extends Component {
 					<Switch>
 						{data &&
 							data.map(m => {
-								return (
-									<Route
-										path={`/${m.id}`}
-										exact
-										render={() => (
-                                 <PhotoDetails data={m}/>
-										)}
-									/>
-								);
+								return <Route key={m.id} path={`/${m.id}`} exact render={() => <PhotoDetails data={m} />} />;
 							})}
 
-						<div className="flex-container">
-							{data &&
-								data.map(m => {
-									return (
-										<Fragment>
-											<Link to={`/${m.id}`}>
-												<img
-													className="thumb"
-													title={m.title}
-													src={m.display_sizes[2].uri}
-													alt={m.artist}
-													key={m.id}
-												/>
-											</Link>
-										</Fragment>
-									);
-								})}
-						</div>
+						<Route
+							path="/"
+							exact
+							render={() => (
+								<div className="flex-container">
+									{data &&
+										data.map(m => {
+											return (
+												<Link to={`/${m.id}`} key={m.id}>
+													<img
+														className="thumb"
+														title={m.title}
+														src={m.display_sizes[2].uri}
+														alt={m.artist}
+														key={m.id}
+													/>
+												</Link>
+											);
+										})}
+								</div>
+							)}
+						/>
 					</Switch>
 				</div>
 			</Router>
