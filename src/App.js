@@ -45,42 +45,54 @@ class App extends Component {
 										exact
 										render={() => (
 											<Fragment>
-												<img className="large" src={m.display_sizes[0].uri} alt={m.artist} key={m.id} />
-												<table>
-													<tr>
-														<td>
-															<p>Title</p>
-														</td>
-														<td>
-															<p>{m.title}</p>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<p>Caption</p>
-														</td>
-														<td>
-															<p>{m.caption}</p>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															<p>Artist</p>
-														</td>
-														<td>
-															<p>{m.artist}</p>
-														</td>
-													</tr>
-												</table>
+												<figure style={{ textAlign: "center" }}>
+													<img className="large" src={m.display_sizes[0].uri} alt={m.artist} key={m.id} />
+												</figure>
+												<div className="info-container">
+													<table>
+														<tr>
+															<td>
+																<p>Title</p>
+															</td>
+															<td>
+																<p>{m.title}</p>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<p>Caption</p>
+															</td>
+															<td>
+																<p>{m.caption}</p>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<p>Artist</p>
+															</td>
+															<td>
+																<p>{m.artist}</p>
+															</td>
+														</tr>
+													</table>
 
-												<div className="editfield">
-													<h2>Edit data</h2>
-													<p>Title</p>
-													<input type="text" className="mb-2" defaultValue={m.title} />
-													<p>Caption</p>
-													<textarea className="mb-2" defaultValue={m.caption} />
-													<p>Artist</p>
-													<input type="text" className="mb-2" defaultValue={m.artist} />
+													<span className="cursor"
+														onClick={() => {
+															alert("hey");
+														}}
+													>
+														[Edit]
+													</span>
+
+													<div className="editfield">
+														<h2>Edit data</h2>
+														<p>Title</p>
+														<input type="text" className="mb-2" defaultValue={m.title} />
+														<p>Caption</p>
+														<textarea className="mb-2" defaultValue={m.caption} />
+														<p>Artist</p>
+														<input type="text" className="mb-2" defaultValue={m.artist} />
+													</div>
 												</div>
 											</Fragment>
 										)}
@@ -94,7 +106,13 @@ class App extends Component {
 									return (
 										<Fragment>
 											<Link to={`/${m.id}`}>
-												<img className="thumb" src={m.display_sizes[2].uri} alt={m.artist} key={m.id} />
+												<img
+													className="thumb"
+													title={m.title}
+													src={m.display_sizes[2].uri}
+													alt={m.artist}
+													key={m.id}
+												/>
 											</Link>
 										</Fragment>
 									);
