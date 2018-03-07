@@ -11,6 +11,25 @@
     background-color: $headerBgColor;
     padding: 15px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .search {
+
+      input {
+        transition: all 0.7s ease 0s;
+        padding: 10px;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        box-shadow: $boxShadow;
+      }
+
+      input:focus {
+        width: 300px;    
+        outline: none;
+      }
+    }
 
       .App-logo {
         height: 25px;
@@ -45,6 +64,32 @@
           cursor: pointer;
           font-size: 30px;
         }
+        .content {
+
+          margin-top: 20px;
+          
+          .items {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 10px;
+
+            input, textarea {
+              padding: 10px;
+              border-radius: 4px;
+              outline: none;
+              border: none;
+              box-shadow: $boxShadow;
+              width: 25vw;
+            }
+
+            textarea {
+              resize: none;
+              height: 20vh;
+            }
+          }
+        }
+        
 
       }
 

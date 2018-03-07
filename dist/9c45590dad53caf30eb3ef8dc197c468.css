@@ -79,7 +79,19 @@ body {
   .App .App-header {
     background-color: rgba(51, 63, 72, 0.8);
     padding: 15px;
-    display: flex; }
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+    .App .App-header .search input {
+      transition: all 0.7s ease 0s;
+      padding: 10px;
+      border-radius: 4px;
+      outline: none;
+      border: none;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12); }
+    .App .App-header .search input:focus {
+      width: 300px;
+      outline: none; }
     .App .App-header .App-logo {
       height: 25px; }
     .App .App-header .App-title {
@@ -103,6 +115,23 @@ body {
         justify-content: flex-end;
         cursor: pointer;
         font-size: 30px; }
+      .App .container .fullImage .imageview .content, .App .container .fullImage .editsection .content {
+        margin-top: 20px; }
+        .App .container .fullImage .imageview .content .items, .App .container .fullImage .editsection .content .items {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          padding: 10px; }
+          .App .container .fullImage .imageview .content .items input, .App .container .fullImage .imageview .content .items textarea, .App .container .fullImage .editsection .content .items input, .App .container .fullImage .editsection .content .items textarea {
+            padding: 10px;
+            border-radius: 4px;
+            outline: none;
+            border: none;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            width: 25vw; }
+          .App .container .fullImage .imageview .content .items textarea, .App .container .fullImage .editsection .content .items textarea {
+            resize: none;
+            height: 20vh; }
     .App .container .fullImage .imageview {
       border-right: 3px dotted #ccc;
       display: flex;

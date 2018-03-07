@@ -14,7 +14,8 @@ class Results extends Component {
       loadFullImage: false,
       imageURI: "",
       selectedImage: [],
-      caption: ""
+      caption: "",
+      selectedTitle: ""
     }
 
   }
@@ -27,7 +28,7 @@ class Results extends Component {
 
   fetchData(){
 
-    fetch("http://localhost:3010/images/")
+    fetch(constants.BASE_URL)
     .then(function(response) {
       return response.json();
     })
@@ -52,7 +53,8 @@ class Results extends Component {
   closeModal(){
     this.setState({
       loadFullImage: false,
-      imageURI: ""
+      imageURI: "",
+      selectTitle: ""
     })
   }
   assertSelection(e, item){
@@ -77,13 +79,16 @@ class Results extends Component {
     this.setState({
       loadFullImage: true,
       caption: item.caption,
+      selectedTitle: item.title,
       imageURI: item.display_sizes.filter(i => i.name == "preview")[0].uri
     })
   }
 
   loadResults(){
 
-      let records = this.state.results;
+      //let records = this.state.results;
+      //let records = (this.props.searchResults.length) ? this.props.searchResults : this.state.results;
+      let records = (this.props.keyword) ? this.props.searchResults : this.state.results;
       
       return (<div className="records">
         {records.map((item, index) => (
@@ -101,10 +106,13 @@ class Results extends Component {
   }
 
   render() {
+    
+    let itemValues = (this.props.keyword) ? this.props.searchResults : this.state.results;
+
     return (
         <div>
         <div className="section">
-            {this.state.results.length ? this.loadResults() : <div className="records"> <div className="norecords"> {constants.NO_RECORDS_AVAILABLE} </div> </div>}
+            {itemValues.length ? this.loadResults() : <div className="records"> <div className="norecords">{constants.NO_RECORDS_AVAILABLE} </div> </div>}
         </div>
             {this.state.selectedImage.length ? <div className="itemButtons"> Delete ({this.state.selectedImage.length})</div> : null }
           
@@ -116,7 +124,7 @@ class Results extends Component {
               </div>
               <div className="editsection">
                 <div className="closebtn" onClick={this.closeModal.bind(this)}><i className="fa fa-times-circle"></i></div>
-                <EditImage caption={this.state.caption}/>
+                <EditImage title={this.state.selectedTitle} caption={this.state.caption}/>
               </div>
             </div> : null}
         </div>

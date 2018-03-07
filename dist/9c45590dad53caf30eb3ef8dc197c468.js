@@ -17954,10 +17954,11 @@ var constants = {
     RESULTS_PANEL: "RESULTS",
     ADD_BUTTON: "Add",
     REMOVE_BUTTON: "Remove",
-    EDIT_IMAGE: "Edit Image",
+    EDIT_IMAGE: "Edit Section",
     RESULTS_HEADER: "Results",
-    NO_RECORDS_AVAILABLE: "No records Available.",
-    SAVED_PROPERTY: "Saved"
+    NO_RECORDS_AVAILABLE: "Sorry, No records Available.",
+    SAVED_PROPERTY: "Saved",
+    BASE_URL: "http://localhost:3010/images/"
 };
 
 exports.default = constants;
@@ -17996,6 +17997,16 @@ var EditImage = function (_Component) {
   }
 
   _createClass(EditImage, [{
+    key: 'handleSubmit',
+    value: function handleSubmit() {
+      console.log();
+    }
+  }, {
+    key: 'handleKeyUp',
+    value: function handleKeyUp(event) {
+      if (event.keyCode == 13) return this.sendData();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -18008,36 +18019,41 @@ var EditImage = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          null,
+          { className: 'content' },
           _react2.default.createElement(
-            'div',
-            { className: 'items' },
-            ' ',
+            'form',
+            { onKeyUp: this.handleKeyUp, onSubmit: this.handleSubmit },
             _react2.default.createElement(
-              'label',
-              null,
-              ' Title '
+              'div',
+              { className: 'items' },
+              ' ',
+              _react2.default.createElement(
+                'label',
+                null,
+                ' Title '
+              ),
+              ' ',
+              _react2.default.createElement('input', { ref: 'title', value: this.props.title }),
+              ' '
             ),
-            ' ',
-            _react2.default.createElement('input', null),
-            ' '
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'items' },
-            ' ',
             _react2.default.createElement(
-              'label',
-              null,
-              ' Captions '
+              'div',
+              { className: 'items' },
+              ' ',
+              _react2.default.createElement(
+                'label',
+                null,
+                ' Captions '
+              ),
+              ' ',
+              _react2.default.createElement('textarea', { ref: 'caption', defaultValue: this.props.caption }),
+              ' '
             ),
-            ' ',
             _react2.default.createElement(
-              'textarea',
-              null,
-              this.props.caption
-            ),
-            ' '
+              'div',
+              { className: 'items' },
+              'Submit'
+            )
           )
         )
       );
@@ -18095,7 +18111,8 @@ var Results = function (_Component) {
       loadFullImage: false,
       imageURI: "",
       selectedImage: [],
-      caption: ""
+      caption: "",
+      selectedTitle: ""
     };
 
     return _this;
@@ -18112,7 +18129,7 @@ var Results = function (_Component) {
     value: function fetchData() {
       var _this2 = this;
 
-      fetch("http://localhost:3010/images/").then(function (response) {
+      fetch(_constants2.default.BASE_URL).then(function (response) {
         return response.json();
       }).then(function (response) {
         _this2.setState({
@@ -18143,7 +18160,8 @@ var Results = function (_Component) {
     value: function closeModal() {
       this.setState({
         loadFullImage: false,
-        imageURI: ""
+        imageURI: "",
+        selectTitle: ""
       });
     }
   }, {
@@ -18169,6 +18187,7 @@ var Results = function (_Component) {
       this.setState({
         loadFullImage: true,
         caption: item.caption,
+        selectedTitle: item.title,
         imageURI: item.display_sizes.filter(function (i) {
           return i.name == "preview";
         })[0].uri
@@ -18179,7 +18198,9 @@ var Results = function (_Component) {
     value: function loadResults() {
       var _this3 = this;
 
-      var records = this.state.results;
+      //let records = this.state.results;
+      //let records = (this.props.searchResults.length) ? this.props.searchResults : this.state.results;
+      var records = this.props.keyword ? this.props.searchResults : this.state.results;
 
       return _react2.default.createElement(
         'div',
@@ -18216,20 +18237,22 @@ var Results = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+
+      var itemValues = this.props.keyword ? this.props.searchResults : this.state.results;
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           'div',
           { className: 'section' },
-          this.state.results.length ? this.loadResults() : _react2.default.createElement(
+          itemValues.length ? this.loadResults() : _react2.default.createElement(
             'div',
             { className: 'records' },
             ' ',
             _react2.default.createElement(
               'div',
               { className: 'norecords' },
-              ' ',
               _constants2.default.NO_RECORDS_AVAILABLE,
               ' '
             ),
@@ -18266,7 +18289,7 @@ var Results = function (_Component) {
               { className: 'closebtn', onClick: this.closeModal.bind(this) },
               _react2.default.createElement('i', { className: 'fa fa-times-circle' })
             ),
-            _react2.default.createElement(_EditImage2.default, { caption: this.state.caption })
+            _react2.default.createElement(_EditImage2.default, { title: this.state.selectedTitle, caption: this.state.caption })
           )
         ) : null
       );
@@ -18322,15 +18345,45 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_Component) {
   _inherits(App, _Component);
 
-  function App() {
+  function App(props) {
     _classCallCheck(this, App);
 
-    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+
+    _this.state = {
+      searchResults: [],
+      keyword: false
+    };
+    return _this;
   }
 
   _createClass(App, [{
+    key: 'searchImage',
+    value: function searchImage(e) {
+      var _this2 = this;
+
+      var inputText = e.target.value;
+
+      this.setState({
+        searchResults: inputText.length == 0 ? [] : this.state.searchResults,
+        keyword: inputText.length == 0 ? false : true
+      });
+
+      var searchURL = _constants2.default.BASE_URL + '?caption_like=' + e.target.value;
+
+      fetch(searchURL).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        console.log(response);
+        _this2.setState({
+          searchResults: response
+        });
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
 
       return _react2.default.createElement(
         'div',
@@ -18341,14 +18394,16 @@ var App = function (_Component) {
           _react2.default.createElement('img', { src: _unscriptd2.default, className: 'App-logo', alt: 'logo' }),
           _react2.default.createElement(
             'div',
-            null,
-            'Search'
+            { className: 'search' },
+            _react2.default.createElement('input', { onChange: function onChange(e) {
+                return _this3.searchImage(e);
+              }, type: 'text', placeholder: 'SEARCH' })
           )
         ),
         _react2.default.createElement(
           'section',
           { className: 'container' },
-          _react2.default.createElement(_Results2.default, null)
+          _react2.default.createElement(_Results2.default, { keyword: this.state.keyword, searchResults: this.state.searchResults })
         )
       );
     }
@@ -18378,7 +18433,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
-},{"react":12,"react-dom":13,"./index.css":6,"./App":7}],45:[function(require,module,exports) {
+},{"react":12,"react-dom":13,"./index.css":6,"./App":7}],51:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -18501,5 +18556,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[45,4])
+},{}]},{},[51,4])
 //# sourceMappingURL=/dist/9c45590dad53caf30eb3ef8dc197c468.map
