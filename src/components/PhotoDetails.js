@@ -56,9 +56,8 @@ function PhotoDetails({ data, onClickSave }) {
 							const elements = form.elements;
 							const title = elements.title.value;
 							const caption = elements.caption.value;
-							const artist = elements.artist.value;
 
-							onClickSave({ title, caption, artist, id });
+							onClickSave({ title, caption, id });
 						}}
 					>
 						<div className="editfield">
@@ -66,8 +65,6 @@ function PhotoDetails({ data, onClickSave }) {
 							<input type="text" name="title" className="mb-2" defaultValue={data.title} />
 							<label>Caption</label>
 							<textarea className="mb-2" name="caption" defaultValue={data.caption} />
-							<label>Artist</label>
-							<input type="text" className="mb-2" name="artist" defaultValue={data.artist} />
 						</div>
 						<button className="btn btn-info">Save changes</button>
 					</form>
