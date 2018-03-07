@@ -39,6 +39,7 @@ function PhotoDetails({ data, onClickSave, showEditForm }) {
 					</table>
 
 					<span
+                  id="edit-link"
 						className="cursor"
 						onClick={() => {
 							showEditForm();
@@ -58,7 +59,8 @@ function PhotoDetails({ data, onClickSave, showEditForm }) {
 								const title = elements.title.value;
 								const caption = elements.caption.value;
 
-								onClickSave({ title, caption, id });
+                        onClickSave({ title, caption, id });
+                        showEditForm()
 							}}
 						>
 							<div className="editfield">

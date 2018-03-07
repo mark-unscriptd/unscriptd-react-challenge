@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { listPhotos, updatePhoto, searchPhotoByCaption } from "./api/Photos";
@@ -7,7 +7,7 @@ import PhotoDetails from "./components/PhotoDetails";
 class App extends Component {
 	state = {
 		error: null,
-		enteredWord: "Wade",
+		enteredWord: "",
 		data: null
 	};
 
@@ -53,11 +53,19 @@ class App extends Component {
 	};
 
 	searchImage = () => {
-		const { enteredWord } = this.state;
+		let { enteredWord } = this.state;
 		searchPhotoByCaption(enteredWord).then(res => {
 			this.setState({ data: res });
-		});
-	};
+      })
+      ;
+   };
+   
+   clearSearch = () => {
+		searchPhotoByCaption('').then(res => {
+			this.setState({ data: res });
+      })
+      ;
+   }
 
 	render() {
 		const { data, error, enteredWord } = this.state;
@@ -68,21 +76,6 @@ class App extends Component {
 						<Link to="/">
 							<h1 className="h1 text-center">My awesome moments</h1>
 						</Link>
-
-						<form
-							onSubmit={event => {
-								event.preventDefault();
-                        this.searchImage
-							}}
-						>
-							<input
-								type="text"
-								placeholder="search caption"
-								defaultValue={enteredWord}
-								onChange={this.enteredWordHandler}
-							/>
-							<button onClick={this.searchImage}>Search</button>
-						</form>
 					</header>
 
 					{/* loading error message */}
@@ -111,22 +104,42 @@ class App extends Component {
 							path="/"
 							exact
 							render={() => (
-								<div className="flex-container">
-									{data &&
-										data.map(data => {
-											return (
-												<Link to={`/${data.id}`} key={data.id}>
-													<img
-														className="thumb"
-														title={data.title}
-														src={data.display_sizes[2].uri}
-														alt={data.artist}
-														key={data.id}
-													/>
-												</Link>
-											);
-										})}
-								</div>
+								<Fragment>
+									<div className="flex-container">
+										<div className="w-80">
+											<form
+												onSubmit={event => {
+													event.preventDefault();
+													this.searchImage;
+												}}
+											>
+												<input
+													type="text"
+													id="search-field"
+													placeholder="search caption"
+													defaultValue={enteredWord}
+													onChange={this.enteredWordHandler}
+												/>
+												<button onClick={this.searchImage}>Search</button>
+												<span className="cursor clear" onClick={this.clearSearch}>Clear</span>
+											</form>
+										</div>
+										{data &&
+											data.map(data => {
+												return (
+													<Link to={`/${data.id}`} key={data.id}>
+														<img
+															className="thumb"
+															title={data.title}
+															src={data.display_sizes[2].uri}
+															alt={data.artist}
+															key={data.id}
+														/>
+													</Link>
+												);
+											})}
+									</div>
+								</Fragment>
 							)}
 						/>
 					</Switch>
