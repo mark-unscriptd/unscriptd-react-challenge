@@ -5,7 +5,7 @@ const api = axios.create({
 });
 
 
-export function listPatrick() {
+export function listPhotos() {
    return api.get("/images")
    .then(res => {
       return res.data;

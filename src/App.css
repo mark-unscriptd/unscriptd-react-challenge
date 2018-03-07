@@ -11,6 +11,10 @@
    vertical-align: top;
 }
 
+#error {
+   text-align: center;
+}
+
 .flex-container {
    margin: 0 auto;
    width: 60vw;
@@ -20,7 +24,45 @@
    align-items: flex-start;
 }
 
-.item {
+.thumb {
    width: 180px;
    margin: 22px;
+}
+
+table {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+td {
+   border: 1px solid #ddd;
+   padding: 8px;
+}
+
+.editfield {
+   width: 100%;
+}
+
+.editfield p {
+   margin: 2px;
+}
+
+.editfield input {
+   border-radius: 5px;
+   padding: .5rem;
+   display: block;
+   width: 100%;
+}
+
+.editfield textarea {
+   border-radius: 5px;
+   padding: .5rem;
+   font-family: inherit;
+   display: block;
+   width: 100%;
+   height: 200px;
+}
+
+.mb-2 {
+   margin-bottom: 30px;
 }
