@@ -3,6 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { listPhotos, updatePhoto, searchPhotoByCaption } from "./api/Photos";
 import PhotoDetails from "./components/PhotoDetails";
+import TopPageThumbs from "./components/TopPageThumbs";
 
 class App extends Component {
 	state = {
@@ -105,40 +106,10 @@ class App extends Component {
 							exact
 							render={() => (
 								<Fragment>
-									<div className="flex-container">
-										<div className="w-80">
-											<form
-												onSubmit={event => {
-													event.preventDefault();
-													this.searchImage;
-												}}
-											>
-												<input
-													type="text"
-													id="search-field"
-													placeholder="search caption"
-													defaultValue={enteredWord}
-													onChange={this.enteredWordHandler}
-												/>
-												<button onClick={this.searchImage}>Search</button>
-												<span className="cursor clear" onClick={this.clearSearch}>Clear</span>
-											</form>
-										</div>
-										{data &&
-											data.map(data => {
-												return (
-													<Link to={`/${data.id}`} key={data.id}>
-														<img
-															className="thumb"
-															title={data.title}
-															src={data.display_sizes[2].uri}
-															alt={data.artist}
-															key={data.id}
-														/>
-													</Link>
-												);
-											})}
-									</div>
+                           <TopPageThumbs data={data}
+                            enteredWord={this.enteredWord} searchImage={this.searchImage}
+                            enteredWordHandler={this.enteredWordHandler} clearSearch={this.clearSearch}
+                            />
 								</Fragment>
 							)}
 						/>
