@@ -1,0 +1,94 @@
+@import "variables";
+@import "components";
+
+
+.App {
+  font-family: 'Fira Sans', sans-serif;  
+  text-align: center;
+
+  .App-header {
+    
+    background-color: $headerBgColor;
+    padding: 15px;
+    display: flex;
+
+      .App-logo {
+        height: 25px;
+      }
+
+      .App-title {
+        font-size: 1.5em;
+      }
+  }
+
+  .container {
+
+    .fullImage{
+      position: absolute;
+      background: #fff;
+      top:10px;
+      left: 5px;
+      width: 99vw;
+      text-align: center;
+      height: 98vh;
+      box-shadow: $boxShadow;
+      display: flex;
+      justify-content: space-between;
+
+      .imageview, .editsection {
+        padding: 10px;
+        flex: 50%;
+
+        .closebtn {
+          display: flex;
+          justify-content: flex-end;
+          cursor: pointer;
+          font-size: 30px;
+        }
+
+      }
+
+      .imageview {
+        border-right: 3px dotted #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-direction: column;
+
+          .caption {
+            margin-top: 20px; 
+          }
+        
+      }
+    }
+
+    .section {  
+
+      padding: 10px;
+      margin: 10px;
+
+      .records {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+      }
+
+      .header {
+        background-color: $sectionHeader;
+        color: #fff;
+        padding: 7px;
+      }
+    }
+
+  }
+  
+}
+
+
+
+
+
+
+
+
+
