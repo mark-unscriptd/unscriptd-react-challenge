@@ -17,3 +17,8 @@ export function updatePhoto(id, data) {
      .then(res => res.data)
  }
  
+ export function searchPhotoByCaption(quote) {
+   return api.get(`/images?caption_like=${quote}`)
+     .then((res) => res.data)
+ }
+ 

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
-function PhotoDetails({ data, onClickSave }) {
-   let id = data.id
+function PhotoDetails({ data, onClickSave, showEditForm }) {
+	let id = data.id;
 	return (
 		data && (
 			<Fragment>
@@ -41,33 +41,35 @@ function PhotoDetails({ data, onClickSave }) {
 					<span
 						className="cursor"
 						onClick={() => {
-							alert("hey");
+							showEditForm();
 						}}
 					>
 						[Edit]
 					</span>
 
-					<h2>Edit data</h2>
-					<form
-						onSubmit={event => {
-							event.preventDefault();
+					<div id="form" className="hidden">
+						<h2>Edit data</h2>
+						<form
+							onSubmit={event => {
+								event.preventDefault();
 
-							const form = event.target;
-							const elements = form.elements;
-							const title = elements.title.value;
-							const caption = elements.caption.value;
+								const form = event.target;
+								const elements = form.elements;
+								const title = elements.title.value;
+								const caption = elements.caption.value;
 
-							onClickSave({ title, caption, id });
-						}}
-					>
-						<div className="editfield">
-							<label>Title</label>
-							<input type="text" name="title" className="mb-2" defaultValue={data.title} />
-							<label>Caption</label>
-							<textarea className="mb-2" name="caption" defaultValue={data.caption} />
-						</div>
-						<button className="btn btn-info">Save changes</button>
-					</form>
+								onClickSave({ title, caption, id });
+							}}
+						>
+							<div className="editfield">
+								<label>Title</label>
+								<input type="text" name="title" className="mb-2" defaultValue={data.title} />
+								<label>Caption</label>
+								<textarea className="mb-2" name="caption" defaultValue={data.caption} />
+							</div>
+							<button className="mb-2">Save changes</button>
+						</form>
+					</div>
 				</div>
 			</Fragment>
 		)

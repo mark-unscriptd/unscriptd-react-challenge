@@ -1,13 +1,13 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { listPhotos, updatePhoto } from "./api/Photos";
-import { Search } from "./components/Svg";
+import { listPhotos, updatePhoto, searchPhotoByCaption } from "./api/Photos";
 import PhotoDetails from "./components/PhotoDetails";
 
 class App extends Component {
 	state = {
 		error: null,
+		enteredWord: "Wade",
 		data: null
 	};
 
@@ -42,8 +42,25 @@ class App extends Component {
 			});
 	};
 
+	showEditForm = () => {
+		let toggle = document.getElementById("form");
+		toggle.className = toggle.className === "hidden" ? "" : "hidden";
+	};
+
+	enteredWordHandler = event => {
+		const input = event.target.value;
+		this.setState({ enteredWord: input });
+	};
+
+	searchImage = () => {
+		const { enteredWord } = this.state;
+		searchPhotoByCaption(enteredWord).then(res => {
+			this.setState({ data: res });
+		});
+	};
+
 	render() {
-		const { data, error } = this.state;
+		const { data, error, enteredWord } = this.state;
 		return (
 			<Router>
 				<div className="App">
@@ -51,8 +68,21 @@ class App extends Component {
 						<Link to="/">
 							<h1 className="h1 text-center">My awesome moments</h1>
 						</Link>
-						<input type="text" placeholder="search" />
-						<Search />
+
+						<form
+							onSubmit={event => {
+								event.preventDefault();
+                        this.searchImage
+							}}
+						>
+							<input
+								type="text"
+								placeholder="search caption"
+								defaultValue={enteredWord}
+								onChange={this.enteredWordHandler}
+							/>
+							<button onClick={this.searchImage}>Search</button>
+						</form>
 					</header>
 
 					{/* loading error message */}
@@ -66,7 +96,13 @@ class App extends Component {
 										key={data.id}
 										path={`/${data.id}`}
 										exact
-										render={() => <PhotoDetails data={data} onClickSave={this.onClickSave} />}
+										render={() => (
+											<PhotoDetails
+												data={data}
+												onClickSave={this.onClickSave}
+												showEditForm={this.showEditForm}
+											/>
+										)}
 									/>
 								);
 							})}
