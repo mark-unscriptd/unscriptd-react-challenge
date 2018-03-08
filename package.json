@@ -3,15 +3,26 @@
   "version": "1.0.0",
   "description": "A package containing a simple dummy media API, which should be used in the challenge",
   "dependencies": {
+    "antd": "^3.2.3",
+    "axios": "^0.18.0",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.1",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   },
-  "keywords": ["react challenge", "tryouts", "react developer", "hiring"],
+  "keywords": [
+    "react challenge",
+    "tryouts",
+    "react developer",
+    "hiring"
+  ],
   "author": "Unscriptd Ltd",
   "license": "ISC",
   "scripts": {
-    "start": "react-scripts start && json-server --port 3010 --watch db.json",
+    "start": "json-server --port 3010 --watch db.json | react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
