@@ -3,7 +3,9 @@ import ThumbNail from './ThumbNail/ThumbNail';
 import ImageDetail from './ImageDetail/ImageDetail';
 import Search from './Search/Search'
 import Snackbar from 'material-ui/Snackbar';
+import DeleteImagesButton from './DeleteImagesButton/DeleteImagesButton'
 import './App.css';
+const DB_URL = 'http://localhost:3010/images/';
 
 class App extends Component {
 
@@ -18,7 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3010/images')
+    fetch(DB_URL)
     .then(results => {
       if (results.ok) {
         return results.json()
@@ -31,7 +33,7 @@ class App extends Component {
   }
 
   changeView(id) {
-    fetch(`http://localhost:3010/images/${id}`)
+    fetch(DB_URL + id)
     .then(results => results.json())
     .then(data => {
       this.setState({ 
@@ -54,7 +56,7 @@ class App extends Component {
       artist,
       display_sizes
     }
-    fetch(`http://localhost:3010/images/${id}`, {
+    fetch(DB_URL + id, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: {
@@ -74,7 +76,7 @@ class App extends Component {
   }
 
   searchCaptions(value) {
-    fetch(`http://localhost:3010/images/?caption_like=${value}`)
+    fetch(`${DB_URL}?caption_like=${value}`)
     .then(response => {
       if (response.ok) {
         return response.json()
@@ -96,6 +98,7 @@ class App extends Component {
               <Search 
                 search={(value) => this.searchCaptions(value)}
               />
+              
             </div>
             <div className='app__home_thumbnail_container'>
               {imageData.map((item, id) => (
