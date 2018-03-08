@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { listPhotos, updatePhoto, searchPhotoByCaption, deletePhoto } from "./api/Photos";
 import PhotoDetails from "./components/PhotoDetails";
 import TopPageThumbs from "./components/TopPageThumbs";
+import SearchField from "./components/SearchField";
 
 class App extends Component {
 	state = {
@@ -50,7 +51,7 @@ class App extends Component {
 	};
 
 	showEditForm = () => {
-		let toggle = document.getElementById("form");
+		let toggle = document.getElementById("edit-wrapper");
 		toggle.className = toggle.className === "hidden" ? "" : "hidden";
 	};
 
@@ -68,25 +69,24 @@ class App extends Component {
 
 	clearSearch = () => {
 		searchPhotoByCaption("").then(res => {
-			this.setState({ data: res });
+			this.setState({ data: res, error: null });
 		});
 	};
 
-	toggleTick = (event) => {
-      const elements = event.target
-      const isChecked = elements.checked;
-      const id = elements.value
-      const { selectedPhotos } = this.state;
+	toggleTick = event => {
+		const elements = event.target;
+		const isChecked = elements.checked;
+		const id = elements.value;
+		const { selectedPhotos } = this.state;
 
-      if (isChecked) {
-         selectedPhotos.push(id);
-         this.setState({ selectedPhotos });
-      }
-      else {
-         const index = selectedPhotos.indexOf(id)
-         selectedPhotos.splice(index, 1)
-         this.setState({ selectedPhotos });
-      }
+		if (isChecked) {
+			selectedPhotos.push(id);
+			this.setState({ selectedPhotos });
+		} else {
+			const index = selectedPhotos.indexOf(id);
+			selectedPhotos.splice(index, 1);
+			this.setState({ selectedPhotos });
+		}
 	};
 
 	deletePhotos = () => {
@@ -110,14 +110,48 @@ class App extends Component {
 				<div className="App">
 					<header className="header">
 						<Link to="/">
-							<h1 className="h1 text-center">Our awesome moments</h1>
+							<h1 className="h1 text-center">
+								<span role="img" aria-label="v">
+									🤘
+								</span>Our awesome moments
+								<span role="img" aria-label="v">
+									🤘
+								</span>
+							</h1>
 						</Link>
 					</header>
 
 					{/* load error message */}
 					{error && <h2 id="error">{error.message}</h2>}
 
+					{/* Main */}
 					<Switch>
+						<Route
+							path="/"
+							exact
+							render={() => (
+								<Fragment>
+									<SearchField
+										enteredWord={this.enteredWord}
+										searchImage={this.searchImage}
+										enteredWordHandler={this.enteredWordHandler}
+										clearSearch={this.clearSearch}
+									/>
+									<TopPageThumbs
+										data={data}
+										enteredWord={this.enteredWord}
+										searchImage={this.searchImage}
+										enteredWordHandler={this.enteredWordHandler}
+										clearSearch={this.clearSearch}
+										selectedPhotos={selectedPhotos}
+										toggleTick={this.toggleTick}
+										deletePhotos={this.deletePhotos}
+									/>
+								</Fragment>
+							)}
+						/>
+
+						{/* Show individual photo */}
 						{data &&
 							data.map(data => {
 								return (
@@ -126,34 +160,17 @@ class App extends Component {
 										path={`/${data.id}`}
 										exact
 										render={() => (
-											<PhotoDetails
-												data={data}
-												onClickSave={this.onClickSave}
-												showEditForm={this.showEditForm}
-											/>
+											<Fragment>
+												<PhotoDetails
+													data={data}
+													onClickSave={this.onClickSave}
+													showEditForm={this.showEditForm}
+												/>
+											</Fragment>
 										)}
 									/>
 								);
 							})}
-
-						<Route
-							path="/"
-							exact
-							render={() => (
-								<Fragment>
-									<TopPageThumbs
-										data={data}
-										enteredWord={this.enteredWord}
-										searchImage={this.searchImage}
-										enteredWordHandler={this.enteredWordHandler}
-										clearSearch={this.clearSearch}
-										selectedPhotos={selectedPhotos}
-                              toggleTick={this.toggleTick}
-                              deletePhotos={this.deletePhotos}
-									/>
-								</Fragment>
-							)}
-						/>
 					</Switch>
 				</div>
 			</Router>

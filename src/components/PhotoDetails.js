@@ -8,7 +8,7 @@ function PhotoDetails({ data, onClickSave, showEditForm }) {
 				<figure style={{ textAlign: "center" }}>
 					<img className="large" src={data.display_sizes[0].uri} alt={data.artist} key={data.id} />
 				</figure>
-				<div className="info-container">
+				<div className="details-container">
 					<table>
 						<tbody>
 							<tr>
@@ -48,7 +48,7 @@ function PhotoDetails({ data, onClickSave, showEditForm }) {
 						[Edit]
 					</span>
 
-					<div id="form" className="hidden">
+					<div id="edit-wrapper" className="hidden">
 						<h2>Edit data</h2>
 						<form
 							onSubmit={event => {

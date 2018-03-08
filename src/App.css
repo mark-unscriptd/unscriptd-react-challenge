@@ -1,156 +1,122 @@
-.header {
-	text-align: center;
-	padding: 20px;
-	background: #333;
-	color: white;
-}
-
-a {
-	text-decoration: none;
-}
-
-a:visited {
-	color: inherit;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-
-
-
 :focus {
-   outline: 0;
-}
-
-#error {
-   text-align: center;
-}
-
-.flex-container {
-   margin: 0 auto;
-	width: 60vw;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-}
-
-.w-80 form {
-   width: 40%;
-   width: auto;
-   margin: 30px 0 10px 0;
-}
-
-#search-field {
-   border-radius: 5px;
-   padding: 0.5rem;
-   margin-right: 3px;
-}
-
-button {
-   border-radius: 5px;
-   padding: 0.5rem;
-   transition: all 0.4s;
-}
-
-button:hover {
-   border-left: 2px solid gray;
-   border-top: 2px solid gray;
-   border-right: 2px solid transparent;
-   border-bottom: 2px solid transparent;
-   color: white;
-   background: lightseagreen;
-}
-
-.clear {
-   font-size: 14px;
-   margin-left: .5rem;
-   padding: 0.5rem;
-   border-radius: 5px;
-   border: 1px solid tomato;
-}
-
-.thumb-wrapper {
-   position: relative;
-}
-
-.thumb-wrapper input {
-   position: absolute;
-}
-
-.thumb {
-	width: 180px;
-   padding: 22px;
-   border: 2px solid whitesmoke;
-   border-radius: 4px;
-   /* background: olive; */
-}
-
-.info-container {
-	width: 60%;
-	margin: 0 auto;
-}
-
-table {
-	border-collapse: collapse;
-}
-
-td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	line-height: 1.5;
-}
-
-.clickable {
-	cursor: pointer;
-	transition: color 0.4s;
-}
-
-.clickable:hover {
-	color: tomato;
-}
-
-.editfield p {
-	margin: 2px;
-}
-
-.editfield input {
-	border-radius: 5px;
-	padding: 0.5rem;
-	display: block;
-	width: 70%;
-}
-
-.editfield input:last-child {
-	width: 180px;
-}
-
-.editfield textarea {
-	border-radius: 5px;
-	padding: 0.5rem;
-	font-family: inherit;
-	display: block;
-	width: 100%;
-	height: 200px;
-}
-
-div#form {
-	transition: all 0.3s ease-in;
-}
-
-.hidden {
-	opacity: 0;
-}
+  outline: 0; }
 
 .mb-2 {
-	margin-bottom: 20px;
-}
-.w-80 {
-   width: 80%;
-}
+  margin-bottom: 20px; }
 
-#delete-button {
-   background: red;
-}
+.w-80 {
+  width: 80%; }
+
+.w-100 {
+  width: 100%; }
+
+.hidden {
+  opacity: 0; }
+
+.clickable {
+  cursor: pointer;
+  transition: color 0.4s; }
+  .clickable:hover {
+    color: tomato; }
+
+.header {
+  text-align: center;
+  padding: 20px;
+  background: #333;
+  color: white; }
+
+a {
+  text-decoration: none; }
+  a:visited {
+    color: inherit; }
+  a:hover {
+    text-decoration: underline; }
+
+#error {
+  text-align: center; }
+
+button {
+  border-radius: 5px;
+  padding: 0.5rem;
+  transition: all 0.4s; }
+  button:hover {
+    border-left: 2px solid gray;
+    border-top: 2px solid gray;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    color: white;
+    background: lightseagreen; }
+
+.flex-container {
+  margin: 0 auto;
+  width: 60vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start; }
+  .flex-container form {
+    margin: 30px 0; }
+  .flex-container #search-field {
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-right: 3px; }
+  .flex-container .clear {
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid tomato; }
+  .flex-container .thumb-wrapper {
+    position: relative;
+    padding: 12px; }
+    .flex-container .thumb-wrapper input {
+      position: absolute;
+      width: 20px;
+      height: 20px; }
+    .flex-container .thumb-wrapper .thumb {
+      width: 180px;
+      border: 2px solid whitesmoke;
+      border-radius: 4px; }
+  .flex-container .svg-wrapper {
+    margin: 2rem;
+    display: block;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center; }
+    .flex-container .svg-wrapper svg {
+      transition: fill .4s ease;
+      height: 100%;
+      width: 80px; }
+      .flex-container .svg-wrapper svg:hover {
+        fill: red; }
+
+.details-container {
+  width: 60%;
+  margin: 0 auto; }
+  .details-container table {
+    border-collapse: collapse; }
+  .details-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    line-height: 1.5; }
+
+#edit-wrapper {
+  transition: all 0.3s ease-in; }
+  #edit-wrapper .editfield p {
+    margin: 2px; }
+  #edit-wrapper .editfield input {
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: block;
+    width: 70%; }
+    #edit-wrapper .editfield input:last-child {
+      width: 180px; }
+  #edit-wrapper .editfield textarea {
+    border-radius: 5px;
+    padding: 0.5rem;
+    font-family: inherit;
+    display: block;
+    width: 100%;
+    height: 200px; }
