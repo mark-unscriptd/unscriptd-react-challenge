@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A package containing a simple dummy media API, which should be used in the challenge",
   "scripts": {
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "json-server --port 3010 --watch db.json",
     "dev": "react-scripts start"
   },
@@ -22,6 +24,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "node-sass-chokidar": "^1.1.0",
     "react-router-dom": "^4.2.2"
   }
 }
