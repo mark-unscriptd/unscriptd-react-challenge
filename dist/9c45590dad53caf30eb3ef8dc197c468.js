@@ -18221,9 +18221,30 @@ var Results = function (_Component) {
       });
     }
   }, {
+    key: 'onDelete',
+    value: function onDelete() {
+      var _this3 = this;
+
+      console.log(this.state.selectedImage);
+      this.setState({
+        selectedImage: []
+      });
+      this.state.selectedImage.map(function (id) {
+
+        fetch('' + _constants2.default.BASE_URL + id, {
+          method: 'DELETE'
+        }).then(function (res) {
+          return res.json();
+        }).then(function (res) {
+          _this3.fetchData();
+          //this.props.closeModal();
+        });
+      });
+    }
+  }, {
     key: 'loadResults',
     value: function loadResults() {
-      var _this3 = this;
+      var _this4 = this;
 
       //let records = this.state.results;
       //let records = (this.props.searchResults.length) ? this.props.searchResults : this.state.results;
@@ -18235,13 +18256,13 @@ var Results = function (_Component) {
         records.map(function (item, index) {
           return _react2.default.createElement(
             'div',
-            { className: 'item ' + (_this3.checkIfAlreadyAdded(item.id) ? 'selected' : '') + ' ', key: index, onClick: function onClick(e) {
-                return _this3.assertSelection(e, item);
+            { className: 'item ' + (_this4.checkIfAlreadyAdded(item.id) ? 'selected' : '') + ' ', key: index, onClick: function onClick(e) {
+                return _this4.assertSelection(e, item);
               } },
             _react2.default.createElement(
               'div',
               { className: 'itemimage' },
-              _react2.default.createElement('img', { src: item.display_sizes[2].uri, onClick: _this3.loadImage.bind(_this3, item) })
+              _react2.default.createElement('img', { src: item.display_sizes[2].uri, onClick: _this4.loadImage.bind(_this4, item) })
             ),
             _react2.default.createElement(
               'div',
@@ -18288,7 +18309,7 @@ var Results = function (_Component) {
         ),
         this.state.selectedImage.length ? _react2.default.createElement(
           'div',
-          { className: 'itemButtons' },
+          { className: 'itemButtons', onClick: this.onDelete.bind(this) },
           ' Delete (',
           this.state.selectedImage.length,
           ')'
@@ -18460,7 +18481,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('root'));
-},{"react":12,"react-dom":13,"./index.css":3,"./App":4}],46:[function(require,module,exports) {
+},{"react":12,"react-dom":13,"./index.css":3,"./App":4}],47:[function(require,module,exports) {
 
 var global = (1, eval)('this');
 var OldModule = module.bundle.Module;
@@ -18583,5 +18604,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.require, id);
   });
 }
-},{}]},{},[46,2])
+},{}]},{},[47,2])
 //# sourceMappingURL=/dist/9c45590dad53caf30eb3ef8dc197c468.map

@@ -88,6 +88,24 @@ class Results extends Component {
       imageURI: item.display_sizes.filter(i => i.name == "preview")[0].uri
     })
   }
+  
+  onDelete() {
+    console.log(this.state.selectedImage)
+    this.setState({
+      selectedImage: []
+    })
+    this.state.selectedImage.map(id => {
+
+      fetch(`${constants.BASE_URL}${id}`, {
+        method: 'DELETE',
+      }).then(res=>res.json())
+      .then(res => {
+        this.fetchData();
+        //this.props.closeModal();
+      });
+
+    })
+  }
 
   loadResults(){
 
@@ -119,7 +137,7 @@ class Results extends Component {
         <div className="section">
             {itemValues.length ? this.loadResults() : <div className="records"> <div className="norecords">{constants.NO_RECORDS_AVAILABLE} </div> </div>}
         </div>
-            {this.state.selectedImage.length ? <div className="itemButtons"> Delete ({this.state.selectedImage.length})</div> : null }
+            {this.state.selectedImage.length ? <div className="itemButtons" onClick={this.onDelete.bind(this)}> Delete ({this.state.selectedImage.length})</div> : null }
           
             {this.state.loadFullImage ? 
             <div className="fullImage"> 
