@@ -6,7 +6,8 @@
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start": "json-server --port 3010 --watch db.json",
-    "dev": "react-scripts start"
+    "dev": "react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   },
   "keywords": [
     "react challenge",
