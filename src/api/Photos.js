@@ -22,3 +22,8 @@ export function updatePhoto(id, data) {
      .then((res) => res.data)
  }
  
+ export function deletePhoto(photo) {
+    return api.delete(`/images/${photo}`)
+      .then(res => res.data)
+ }
+ 

@@ -40,7 +40,7 @@ function PhotoDetails({ data, onClickSave, showEditForm }) {
 
 					<span
                   id="edit-link"
-						className="cursor"
+						className="clickable"
 						onClick={() => {
 							showEditForm();
 						}}

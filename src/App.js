@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { listPhotos, updatePhoto, searchPhotoByCaption } from "./api/Photos";
+import { listPhotos, updatePhoto, searchPhotoByCaption, deletePhoto } from "./api/Photos";
 import PhotoDetails from "./components/PhotoDetails";
 import TopPageThumbs from "./components/TopPageThumbs";
 
@@ -9,18 +9,25 @@ class App extends Component {
 	state = {
 		error: null,
 		enteredWord: "",
-		data: null
+		data: null,
+		selectedPhotos: []
 	};
 
-	componentDidMount() {
+   componentDidMount() {
+      this.load();
+   }
+
+   load() {
 		listPhotos()
 			.then(data => {
-				this.setState({ data });
+            this.setState({ data });
+            this.setState({ selectedPhotos: [] });
 			})
 			.catch(error => {
 				this.setState({ error });
 			});
 	}
+
 
 	onClickSave = editedPhotoData => {
 		updatePhoto(editedPhotoData.id, editedPhotoData)
@@ -57,19 +64,36 @@ class App extends Component {
 		let { enteredWord } = this.state;
 		searchPhotoByCaption(enteredWord).then(res => {
 			this.setState({ data: res });
-      })
-      ;
-   };
-   
-   clearSearch = () => {
-		searchPhotoByCaption('').then(res => {
+		});
+	};
+
+	clearSearch = () => {
+		searchPhotoByCaption("").then(res => {
 			this.setState({ data: res });
+		});
+	};
+
+	toggleTick = val => {
+		let { selectedPhotos } = this.state;
+		selectedPhotos.push(val);
+		this.setState({ selectedPhotos });
+	};
+
+	deletePhotos = () => {
+		let { selectedPhotos } = this.state;
+      selectedPhotos.map(photo => {
+         deletePhoto(photo)
+         .then(res => {
+           this.load();
+         })
+         .catch(error => {
+           this.setState({ error });
+         });
       })
-      ;
-   }
+	};
 
 	render() {
-		const { data, error, enteredWord } = this.state;
+		const { data, error, selectedPhotos } = this.state;
 		return (
 			<Router>
 				<div className="App">
@@ -106,10 +130,17 @@ class App extends Component {
 							exact
 							render={() => (
 								<Fragment>
-                           <TopPageThumbs data={data}
-                            enteredWord={this.enteredWord} searchImage={this.searchImage}
-                            enteredWordHandler={this.enteredWordHandler} clearSearch={this.clearSearch}
-                            />
+									<TopPageThumbs
+										data={data}
+										enteredWord={this.enteredWord}
+										searchImage={this.searchImage}
+										enteredWordHandler={this.enteredWordHandler}
+										clearSearch={this.clearSearch}
+										selectedPhotos={selectedPhotos}
+										toggleTick={this.toggleTick}
+									/>
+
+									<button onClick={this.deletePhotos}>Delete photos</button>
 								</Fragment>
 							)}
 						/>

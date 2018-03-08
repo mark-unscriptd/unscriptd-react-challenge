@@ -92,12 +92,12 @@ td {
 	line-height: 1.5;
 }
 
-.cursor {
+.clickable {
 	cursor: pointer;
 	transition: color 0.4s;
 }
 
-.cursor:hover {
+.clickable:hover {
 	color: tomato;
 }
 
