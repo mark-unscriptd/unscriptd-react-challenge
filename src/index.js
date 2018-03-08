@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 
 import { reducer } from './redux'
 import { watcherSaga } from './sagas'
-
+import Routes from './routes/routes'
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware()
 
@@ -25,7 +25,7 @@ sagaMiddleware.run(watcherSaga)
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Routes />
   </Provider>,
   document.getElementById('root')
 )
