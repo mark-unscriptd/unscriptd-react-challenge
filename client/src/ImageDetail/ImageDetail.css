@@ -12,10 +12,7 @@
 }
 
 .imageDetail__caption {
-  width: 80%;
-  resize: none;
-  height: auto;
-  font-size: 20px;
+  width: 80% !important;
 }
 
 .imageDetail__buttons {

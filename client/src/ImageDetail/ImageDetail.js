@@ -56,9 +56,10 @@ export default class ImageDetail extends Component {
           value={title}
         />
         <img src={previewURI} alt=""/>
-        <TextareaAutosize 
+        <TextField
           className='imageDetail__caption'
-          placeholder='Caption'
+          fullWidth={true}
+          multiLine={true}
           onChange={(e) => this.setState({ caption: e.target.value})}
           value={caption}
         />
