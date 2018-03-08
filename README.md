@@ -1,3 +1,27 @@
+#From Hariram Nandagopal
+
+How to use test the application
+
+
+1) Please open a new terimal and type `npm run start`
+2) Fire up second terminal and type `npm run dev`, you can open the UI using the url mentioned on the terminal, mostly it will be `http://localhost:1234`
+
+How to use the UI
+
+1) Please use the header search box to search the image based on the {caption}, Message "No records available" will be display if there is no match found.
+2) Select on the Items image to view the large pic and edit the Title and caption of the selected item.
+3) Change the title and caption and press save to update the new title and caption. Modal will close automatically.
+4) Select the item(s) (not on the image) to delete. A tiny delete button will show up at bottom of the screen to select the asserts from the json. screen will refresh post successfull deletion. Reduced the items opacity to differentiate between selected and unselected items.
+
+What I have used,
+
+1) Used vanila javascript for everything including for Ajax calls.
+2) used components to split the application for easy maintaince.
+3) Create SASS for CSS and for easy maintaince.
+4) Used `display: grid` for creating the layout.
+5) Used `display: flex` for inner DOM elements.
+6) App is RWD (60 to 70%)
+
 # Unscriptd React Coding Challenge
 
 Seems like you're trying out for a position at
