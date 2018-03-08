@@ -17,6 +17,8 @@ export function reducer (state = initialState, action) {
       error: null
     }
   } else if (action.type === API_CALL_SUCCESS) {
+    console.log("received DATA")
+    console.log(action.imagesList)
     return {
       ...state,
       imagesList: action.imagesList,

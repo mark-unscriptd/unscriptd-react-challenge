@@ -20,10 +20,10 @@ function * workerSaga (action) {
   try {
     const response = yield call(fetchImages, action.payload)
     console.log(response)
-    const imageList = response.data
-    console.log(imageList)
+    const imagesList = response.data
+    console.log(imagesList)
     // dispatch a success action to the store with the new dog
-    yield put({ type: 'API_CALL_SUCCESS', imageList })
+    yield put({ type: 'API_CALL_SUCCESS', imagesList })
   } catch (error) {
     // dispatch a failure action to the store with the error
     yield put({ type: 'API_CALL_FAILURE', error })
