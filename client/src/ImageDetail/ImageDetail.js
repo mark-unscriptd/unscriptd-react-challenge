@@ -1,4 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import TextareaAutosize from 'react-autosize-textarea';
+import './ImageDetail.css';
 
 export default class ImageDetail extends Component {
 
@@ -6,26 +8,44 @@ export default class ImageDetail extends Component {
     super(props);
     this.state = {
       title: '',
-      caption: ''
+      caption: '',
+      previewURI: '',
+      id: ''
     }
   }
 
   componentDidMount() {
-    const { title, caption } = this.props.src
+    const { title, caption, display_sizes, id } = this.props.data
+    const previewURI = display_sizes.filter(size => size.name === 'preview')[0].uri
+
     this.setState({
       title: title,
-      caption: caption
+      caption: caption,
+      previewURI: previewURI,
+      id: id
     })
   }
 
   render() {
-    const { display_sizes, caption, title } = this.props.src
-    const previewURI = display_sizes.filter(size => size.name === 'preview')[0].uri
+    const { title, caption, previewURI, id } = this.state
     return (
-      <div>
-        <h2>{title}</h2>
+      <div className='imageDetail__container'>
+        <input 
+          className='imageDetail__title' 
+          onChange={(e) => this.setState({ title: e.target.value })} 
+          value={title}>
+        </input>
         <img src={previewURI} alt=""/>
-        <p>{caption}</p>
+        <TextareaAutosize 
+          className='imageDetail__caption'
+          placeholder='Caption'
+          onChange={(e) => this.setState({ caption: e.target.value})}
+          value={caption}
+        />
+        <div className='imageDetail__buttons'>
+          <button onClick={() => this.props.back()}>Back</button>
+          <button onClick={() => this.props.update(id, title, caption)}>Submit Changes</button>
+        </div>
       </div>
     )
   }

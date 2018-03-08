@@ -1,0 +1,24 @@
+.imageDetail__container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.imageDetail__title {
+  width: 80%;
+  font-size: 30px;
+  text-align: center;
+}
+
+.imageDetail__caption {
+  width: 80%;
+  resize: none;
+  height: auto;
+  font-size: 24px;
+}
+
+.imageDetail__buttons {
+  display: flex;
+}
