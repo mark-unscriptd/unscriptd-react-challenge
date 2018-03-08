@@ -18,10 +18,11 @@
   "author": "Unscriptd Ltd",
   "license": "ISC",
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "json-server": "0.10.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1",
-    "json-server": "0.10.1"
+    "react-scripts": "1.1.1"
   },
   "dependencies": {
     "axios": "^0.18.0",
