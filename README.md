@@ -1,3 +1,13 @@
+#From Hariram Nandagopal
+
+How to use test the application
+
+
+1) Please open a new terimal and type `npm run start`
+2) Fire up second terminal and type `npm run dev`, you can open the UI using the url mentioned on the terminal, mostly it will be `http://localhost:1234`
+
+
+
 # Unscriptd React Coding Challenge
 
 Seems like you're trying out for a position at

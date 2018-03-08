@@ -90,7 +90,7 @@ class Results extends Component {
   }
   
   onDelete() {
-    console.log(this.state.selectedImage)
+    
     this.setState({
       selectedImage: []
     })

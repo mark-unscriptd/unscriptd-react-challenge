@@ -25,7 +25,6 @@ class EditImage extends Component {
       body: JSON.stringify(saveObject)
     }).then(res=>res.json())
       .then(res => {
-        console.log(res)
         this.props.closeModal();
       });
     }

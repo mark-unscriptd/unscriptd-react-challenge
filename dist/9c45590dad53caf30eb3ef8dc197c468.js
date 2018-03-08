@@ -18023,7 +18023,6 @@ var EditImage = function (_Component) {
       }).then(function (res) {
         return res.json();
       }).then(function (res) {
-        console.log(res);
         _this2.props.closeModal();
       });
     }
@@ -18225,7 +18224,6 @@ var Results = function (_Component) {
     value: function onDelete() {
       var _this3 = this;
 
-      console.log(this.state.selectedImage);
       this.setState({
         selectedImage: []
       });
