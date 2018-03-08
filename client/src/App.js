@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ThumbNail from './ThumbNail/ThumbNail';
 import ImageDetail from './ImageDetail/ImageDetail';
+import Search from './Search/Search'
+import Snackbar from 'material-ui/Snackbar';
 import './App.css';
 
 class App extends Component {
@@ -10,24 +12,15 @@ class App extends Component {
     this.state = {
       imageData: [],
       view: 'home',
-      largeImageData: ''
+      largeImageData: '',
+      snackbarOpen: false
     }
   }
 
   componentDidMount() {
     fetch('http://localhost:3010/images')
     .then(results => results.json())
-    .then(data => {
-      let images = data.map(image => {
-        return (
-          {
-            id: image.id, 
-            uri: image.display_sizes.filter(size => size.name === 'thumb')[0].uri
-          }
-        )
-      })
-      this.setState({ imageData: images })
-    })
+    .then(data => this.setState({ imageData: data }))
   }
 
   changeView(id) {
@@ -45,23 +38,51 @@ class App extends Component {
     this.setState({ view: 'home' })
   }
 
-  updateImage(id, title, caption) {
-    console.log('id ' + id + 'title ' + title + ', caption ' + caption)
+  updateImage(newData) {
+    const { title, caption, date_created, artist, display_sizes, id } = newData
+    let data = {
+      title,
+      caption,
+      date_created,
+      artist,
+      display_sizes
+    }
+    fetch(`http://localhost:3010/images/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        this.setState({ 
+          snackbarOpen: true
+        })
+      }
+    })
+
   }
 
   renderView() {
-    const { view, imageData, largeImageData } = this.state
+    const { view, imageData, largeImageData, snackbarOpen } = this.state
     switch(view) {
       case 'home':
         return (
-          imageData.map((item, id) => (
-            <ThumbNail
-              key={id}
-              image={item.uri}
-              id={item.id}
-              changeView={imageId => this.changeView(imageId)}
-            />
-          ))
+          <div className='app__home_container'>
+            <div>
+              <Search />
+            </div>
+            <div className='app__home_thumbnail_container'>
+              {imageData.map((item, id) => (
+                <ThumbNail
+                  key={id}
+                  data={item}
+                  changeView={imageId => this.changeView(imageId)}
+                />
+              ))}
+            </div>
+          </div>
         )
       case 'imageDetails':
         return (
@@ -69,7 +90,14 @@ class App extends Component {
             <ImageDetail
               data={largeImageData} 
               back={() => this.goBack()}
-              update={(title, caption) => this.updateImage(title, caption)}
+              update={(newData) => this.updateImage(newData)}
+            />
+            <Snackbar 
+              className='app__imageDetails_snackbar'
+              open={snackbarOpen}
+              message="Image Caption and Title Updated"
+              autoHideDuration={3000}
+              onRequestClose={() => this.setState({ snackbarOpen: false })}
             />
           </div>
         )

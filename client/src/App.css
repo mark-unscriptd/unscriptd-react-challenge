@@ -1,0 +1,15 @@
+.app__home_container {
+
+}
+
+.app__home_thumbnail_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.app__imageDetails_snackbar {
+  text-align: center;
+}

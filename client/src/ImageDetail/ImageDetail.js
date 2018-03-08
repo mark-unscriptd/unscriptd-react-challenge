@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import TextareaAutosize from 'react-autosize-textarea';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 import './ImageDetail.css';
 
 export default class ImageDetail extends Component {
@@ -10,31 +12,49 @@ export default class ImageDetail extends Component {
       title: '',
       caption: '',
       previewURI: '',
-      id: ''
+      imageData: {}
     }
   }
 
   componentDidMount() {
-    const { title, caption, display_sizes, id } = this.props.data
+    const { title, caption, display_sizes } = this.props.data
     const previewURI = display_sizes.filter(size => size.name === 'preview')[0].uri
 
     this.setState({
       title: title,
       caption: caption,
       previewURI: previewURI,
-      id: id
+      imageData: this.props.data
     })
   }
 
+  sendUpdate() {
+    let { imageData, title, caption } = this.state
+    let newData = {
+      title: title,
+      caption: caption,
+      display_sizes: imageData.display_sizes,
+      artist: imageData.artist,
+      date_created: imageData.date_created,
+      id: imageData.id
+    }
+    this.props.update(newData)
+  }
+
   render() {
-    const { title, caption, previewURI, id } = this.state
+    const { title, caption, previewURI } = this.state
     return (
       <div className='imageDetail__container'>
-        <input 
+        <TextField 
+          inputStyle={{ textAlign: 'center' }}
+          underlineStyle={{ bottom: '0px' }}
+          underlineFocusStyle={{ borderWidth: '4px', bottom: '0px' }}
+          fullWidth={true}
+          name='Image Title'
           className='imageDetail__title' 
           onChange={(e) => this.setState({ title: e.target.value })} 
-          value={title}>
-        </input>
+          value={title}
+        />
         <img src={previewURI} alt=""/>
         <TextareaAutosize 
           className='imageDetail__caption'
@@ -43,8 +63,8 @@ export default class ImageDetail extends Component {
           value={caption}
         />
         <div className='imageDetail__buttons'>
-          <button onClick={() => this.props.back()}>Back</button>
-          <button onClick={() => this.props.update(id, title, caption)}>Submit Changes</button>
+          <RaisedButton label='Back' onClick={() => this.props.back()} />
+          <RaisedButton label='Submit Changes' primary={true} onClick={() => this.sendUpdate()} />
         </div>
       </div>
     )

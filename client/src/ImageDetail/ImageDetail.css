@@ -7,18 +7,21 @@
 }
 
 .imageDetail__title {
-  width: 80%;
-  font-size: 30px;
-  text-align: center;
+  width: 70% !important; 
+  font-size: 30px !important;
 }
 
 .imageDetail__caption {
   width: 80%;
   resize: none;
   height: auto;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .imageDetail__buttons {
   display: flex;
+}
+
+.imageDetail__buttons > * {
+  margin: 10px;
 }
