@@ -19,8 +19,15 @@ class App extends Component {
 
   componentDidMount() {
     fetch('http://localhost:3010/images')
-    .then(results => results.json())
+    .then(results => {
+      if (results.ok) {
+        return results.json()
+      } else {
+        throw new Error('Issue with getting images fetch')
+      }
+    })
     .then(data => this.setState({ imageData: data }))
+    .catch(err => console.log(err))
   }
 
   changeView(id) {
@@ -59,9 +66,24 @@ class App extends Component {
         this.setState({ 
           snackbarOpen: true
         })
+      } else {
+        throw new Error('Network response was not ok')
       }
     })
+    .catch(err => console.log('Issue with the update fetch: ', err))
+  }
 
+  searchCaptions(value) {
+    fetch(`http://localhost:3010/images/?caption_like=${value}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error('Issue with caption search fetch')
+      }
+    })
+    .then(data => this.setState({ imageData: data }))
+    .catch(err => console.log(err))
   }
 
   renderView() {
@@ -71,7 +93,9 @@ class App extends Component {
         return (
           <div className='app__home_container'>
             <div>
-              <Search />
+              <Search 
+                search={(value) => this.searchCaptions(value)}
+              />
             </div>
             <div className='app__home_thumbnail_container'>
               {imageData.map((item, id) => (
@@ -107,6 +131,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         {this.renderView()}

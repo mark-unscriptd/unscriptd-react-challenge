@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TextareaAutosize from 'react-autosize-textarea';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import './ImageDetail.css';
@@ -57,6 +56,7 @@ export default class ImageDetail extends Component {
         />
         <img src={previewURI} alt=""/>
         <TextField
+          name='Image Caption'
           className='imageDetail__caption'
           fullWidth={true}
           multiLine={true}
