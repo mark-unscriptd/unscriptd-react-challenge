@@ -122,6 +122,18 @@ body {
           flex-direction: row;
           justify-content: space-between;
           padding: 10px; }
+          .App .container .fullImage .imageview .content .items.buttons, .App .container .fullImage .editsection .content .items.buttons {
+            display: block;
+            position: relative;
+            font-size: 13px;
+            width: 100px;
+            padding: 5px;
+            margin-left: 25px;
+            background: #e4002b;
+            border-radius: 5px;
+            transition: all 0.2s;
+            color: #fff;
+            cursor: pointer; }
           .App .container .fullImage .imageview .content .items input, .App .container .fullImage .imageview .content .items textarea, .App .container .fullImage .editsection .content .items input, .App .container .fullImage .editsection .content .items textarea {
             padding: 10px;
             border-radius: 4px;

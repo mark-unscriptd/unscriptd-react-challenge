@@ -12,10 +12,11 @@ class Results extends Component {
     this.state = {
       results: [],
       loadFullImage: false,
-      imageURI: "",
+      selectedItem: "",
       selectedImage: [],
+      imageURI: "",
       caption: "",
-      selectedTitle: ""
+      
     }
 
   }
@@ -54,8 +55,10 @@ class Results extends Component {
     this.setState({
       loadFullImage: false,
       imageURI: "",
-      selectTitle: ""
+      selectedItem: ""
     })
+
+    this.fetchData();
   }
   assertSelection(e, item){
     
@@ -80,6 +83,8 @@ class Results extends Component {
       loadFullImage: true,
       caption: item.caption,
       selectedTitle: item.title,
+      selectedID: item.id,
+      selectedItem: item,
       imageURI: item.display_sizes.filter(i => i.name == "preview")[0].uri
     })
   }
@@ -89,7 +94,7 @@ class Results extends Component {
       //let records = this.state.results;
       //let records = (this.props.searchResults.length) ? this.props.searchResults : this.state.results;
       let records = (this.props.keyword) ? this.props.searchResults : this.state.results;
-      
+
       return (<div className="records">
         {records.map((item, index) => (
             <div className={`item ${(this.checkIfAlreadyAdded(item.id) ? 'selected' : '')} `} key={index} onClick={(e) => this.assertSelection(e, item)}>
@@ -124,7 +129,7 @@ class Results extends Component {
               </div>
               <div className="editsection">
                 <div className="closebtn" onClick={this.closeModal.bind(this)}><i className="fa fa-times-circle"></i></div>
-                <EditImage title={this.state.selectedTitle} caption={this.state.caption}/>
+                <EditImage closeModal={this.closeModal.bind(this)} item={this.state.selectedItem}/>
               </div>
             </div> : null}
         </div>
