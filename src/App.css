@@ -72,9 +72,20 @@ button:hover {
    border: 1px solid tomato;
 }
 
+.thumb-wrapper {
+   position: relative;
+}
+
+.thumb-wrapper input {
+   position: absolute;
+}
+
 .thumb {
 	width: 180px;
-   margin: 22px;
+   padding: 22px;
+   border: 2px solid whitesmoke;
+   border-radius: 4px;
+   /* background: olive; */
 }
 
 .info-container {
@@ -138,4 +149,8 @@ div#form {
 }
 .w-80 {
    width: 80%;
+}
+
+#delete-button {
+   background: red;
 }

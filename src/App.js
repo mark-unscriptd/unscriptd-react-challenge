@@ -110,7 +110,7 @@ class App extends Component {
 				<div className="App">
 					<header className="header">
 						<Link to="/">
-							<h1 className="h1 text-center">My awesome moments</h1>
+							<h1 className="h1 text-center">Our awesome moments</h1>
 						</Link>
 					</header>
 
@@ -148,10 +148,9 @@ class App extends Component {
 										enteredWordHandler={this.enteredWordHandler}
 										clearSearch={this.clearSearch}
 										selectedPhotos={selectedPhotos}
-										toggleTick={this.toggleTick}
+                              toggleTick={this.toggleTick}
+                              deletePhotos={this.deletePhotos}
 									/>
-
-									<button onClick={this.deletePhotos}>Delete photos</button>
 								</Fragment>
 							)}
 						/>

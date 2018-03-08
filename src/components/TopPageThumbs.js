@@ -8,7 +8,8 @@ function TopPageThumbs({
 	searchImage,
 	enteredWordHandler,
 	clearSearch,
-	toggleTick
+   toggleTick,
+   deletePhotos
 }) {
 	return (
 		data && (
@@ -37,7 +38,7 @@ function TopPageThumbs({
 				{/* show thumbnails */}
 				{data.map(data => {
 					return (
-						<div key={`div_${data.id}`}>
+						<div className="thumb-wrapper" key={`div_${data.id}`}>
 							<input
 								type="checkbox"
 								name={data.id}
@@ -56,7 +57,12 @@ function TopPageThumbs({
 							</Link>
 						</div>
 					);
-				})}
+            })}
+
+            {/* Delete Button */}
+				<button className="w-80" id="delete-button" onClick={deletePhotos}>
+					Delete photos
+				</button>
 			</div>
 		)
 	);
