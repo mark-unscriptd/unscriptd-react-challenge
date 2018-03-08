@@ -8,7 +8,7 @@ How to use test the application
 
 How to use the UI
 
-1) Please use the header search box to search the image based on the {caption}
+1) Please use the header search box to search the image based on the {caption}, Message "No records available" will be display if there is no match found.
 2) Select on the Items image to view the large pic and edit the Title and caption of the selected item.
 3) Change the title and caption and press save to update the new title and caption. Modal will close automatically.
 4) Select the item(s) (not on the image) to delete. A tiny delete button will show up at bottom of the screen to select the asserts from the json. screen will refresh post successfull deletion.
