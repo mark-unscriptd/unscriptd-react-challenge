@@ -13,21 +13,20 @@ class App extends Component {
 		selectedPhotos: []
 	};
 
-   componentDidMount() {
-      this.load();
-   }
+	componentDidMount() {
+		this.load();
+	}
 
-   load() {
+	load() {
 		listPhotos()
 			.then(data => {
-            this.setState({ data });
-            this.setState({ selectedPhotos: [] });
+				this.setState({ data });
+				this.setState({ selectedPhotos: [] });
 			})
 			.catch(error => {
 				this.setState({ error });
 			});
 	}
-
 
 	onClickSave = editedPhotoData => {
 		updatePhoto(editedPhotoData.id, editedPhotoData)
@@ -73,23 +72,35 @@ class App extends Component {
 		});
 	};
 
-	toggleTick = val => {
-		let { selectedPhotos } = this.state;
-		selectedPhotos.push(val);
-		this.setState({ selectedPhotos });
+	toggleTick = (event) => {
+      const elements = event.target
+      const isChecked = elements.checked;
+      const id = elements.value
+      const { selectedPhotos } = this.state;
+
+      if (isChecked) {
+         selectedPhotos.push(id);
+         this.setState({ selectedPhotos });
+      }
+      else {
+         const index = selectedPhotos.indexOf(id)
+         selectedPhotos.splice(index, 1)
+         this.setState({ selectedPhotos });
+      }
 	};
 
 	deletePhotos = () => {
 		let { selectedPhotos } = this.state;
-      selectedPhotos.map(photo => {
-         deletePhoto(photo)
-         .then(res => {
-           this.load();
-         })
-         .catch(error => {
-           this.setState({ error });
-         });
-      })
+		selectedPhotos.map(photo => {
+			deletePhoto(photo)
+				.then(res => {
+					this.load();
+				})
+				.catch(error => {
+					this.setState({ error });
+				});
+			return null;
+		});
 	};
 
 	render() {
@@ -103,7 +114,7 @@ class App extends Component {
 						</Link>
 					</header>
 
-					{/* loading error message */}
+					{/* load error message */}
 					{error && <h2 id="error">{error.message}</h2>}
 
 					<Switch>

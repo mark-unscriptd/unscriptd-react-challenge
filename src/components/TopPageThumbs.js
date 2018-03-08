@@ -10,14 +10,7 @@ function TopPageThumbs({
 	clearSearch,
 	toggleTick
 }) {
-   
-   const filterItems = (query) => {
-      return selectedPhotos.filter((el) =>
-        el.indexOf(query) > -1
-      );
-    }
-   
-   return (
+	return (
 		data && (
 			<div className="flex-container">
 				<div className="w-80">
@@ -44,14 +37,14 @@ function TopPageThumbs({
 				{/* show thumbnails */}
 				{data.map(data => {
 					return (
-						<div>
-							<span className="clickable" onClick={() => toggleTick(data.id)}>
-                     ⚪️
-								{/* {m.completed ? (
-								) : (
-									<i className="glyphicon icon-checkbox-unchecked" />
-								)} */}
-							</span>
+						<div key={`div_${data.id}`}>
+							<input
+								type="checkbox"
+								name={data.id}
+								value={data.id}
+								onChange={toggleTick}
+								key={`input_${data.id}`}
+							/>
 							<Link to={`/${data.id}`} key={data.id}>
 								<img
 									className="thumb"
