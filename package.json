@@ -1,14 +1,21 @@
-
 {
   "name": "react-coding-challenge",
   "version": "1.0.0",
   "description": "A package containing a simple dummy media API, which should be used in the challenge",
-  "scripts": {
-    "start": "json-server --port 3010 --watch db.json"
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
   },
   "keywords": ["react challenge", "tryouts", "react developer", "hiring"],
   "author": "Unscriptd Ltd",
   "license": "ISC",
+  "scripts": {
+    "start": "react-scripts start && json-server --port 3010 --watch db.json",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
   "devDependencies": {
     "json-server": "0.10.1"
   }
