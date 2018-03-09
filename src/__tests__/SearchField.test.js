@@ -1,23 +1,46 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import SearchField from "../components/SearchField";
-import axios from "axios";
+import TestRenderer from 'react-test-renderer';
 import ShallowRenderer from "react-test-renderer/shallow";
+import ReactTestUtils from 'react-dom/test-utils';
 
-describe("#getUser() using Promises", () => {
+import SearchField from "../components/SearchField";
+import axios from 'axios'
+
+// function MyComponent() {
+//   return (
+//     <div>
+//       <SubComponent foo="bar" />
+//       <p className="my">Hello</p>
+//     </div>
+//   )
+// }
+
+// function SubComponent() {
+//   return (
+//     <p className="sub">Sub</p>
+//   );
+// }
+
+// jest.mock('axios', () => 'Video')
+
+
+describe("Search field", () => {
   it("should load user data", () => {
-    return axios.get("http://localhost:3010/images/928305966").then(data => {
-      expect(data).toBeDefined();
-      expect(data.data.artist).toEqual("Patrick Smith");
-    });
+    // const testRenderer = TestRenderer.create(<MyComponent />);
+    // const testInstance = testRenderer.root
     
+    // expect(testInstance.findByType(SubComponent).props.foo).toBe('bar')
+    // expect(testInstance.findByProps({className: "sub"}).children).toEqual(['Sub'])
+    
+
+    // const renderer = new ShallowRenderer();
+    // renderer.render(<SearchField />)
+
+    
+    // const result = renderer.getRenderOutput();
+    // ReactTestUtils.Simulate.click()
   });
-
-  const renderer = new ShallowRenderer();
-  renderer.render(<SearchField/>)
-  const result = renderer.getRenderOutput();
-  // console.log(result.props.children)
-
 });
 
   
