@@ -13,9 +13,13 @@ class App extends Component {
 		data: null,
 		selectedPhotos: []
 	};
+  
+  
+  componentDidMount() {
+    setTimeout(() => {
+      this.load();
+    }, 10);
 
-	componentDidMount() {
-		this.load();
 	}
 
 	load() {
