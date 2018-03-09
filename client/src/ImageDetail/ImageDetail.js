@@ -51,7 +51,7 @@ export default class ImageDetail extends Component {
           fullWidth={true}
           name='Image Title'
           className='imageDetail__title' 
-          onChange={(e) => this.setState({ title: e.target.value })} 
+          onChange={e => this.setState({ title: e.target.value })} 
           value={title}
         />
         <img src={previewURI} alt=""/>
@@ -60,7 +60,7 @@ export default class ImageDetail extends Component {
           className='imageDetail__caption'
           fullWidth={true}
           multiLine={true}
-          onChange={(e) => this.setState({ caption: e.target.value})}
+          onChange={e => this.setState({ caption: e.target.value})}
           value={caption}
         />
         <div className='imageDetail__buttons'>

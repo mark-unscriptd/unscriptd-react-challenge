@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ThumbNail from './ThumbNail/ThumbNail';
 import ImageDetail from './ImageDetail/ImageDetail';
-import Search from './Search/Search'
+import Search from './Search/Search';
 import Snackbar from 'material-ui/Snackbar';
-import DeleteImagesButton from './DeleteImagesButton/DeleteImagesButton'
+import Toggle from 'material-ui/Toggle';
+import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 const DB_URL = 'http://localhost:3010/images/';
 
@@ -15,7 +16,9 @@ class App extends Component {
       imageData: [],
       view: 'home',
       largeImageData: '',
-      snackbarOpen: false
+      snackbarOpen: false,
+      deleteMode: false,
+      imagesDelete: []
     }
   }
 
@@ -48,17 +51,9 @@ class App extends Component {
   }
 
   updateImage(newData) {
-    const { title, caption, date_created, artist, display_sizes, id } = newData
-    let data = {
-      title,
-      caption,
-      date_created,
-      artist,
-      display_sizes
-    }
-    fetch(DB_URL + id, {
+    fetch(DB_URL + newData.id, {
       method: 'PUT',
-      body: JSON.stringify(data),
+      body: JSON.stringify(newData),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -88,23 +83,61 @@ class App extends Component {
     .catch(err => console.log(err))
   }
 
+  toggleDeleteMode() {
+    let { deleteMode } = this.state
+    this.setState({ deleteMode: !deleteMode })
+  }
+
+  closeSnackBar() {
+    this.setState({ snackbarOpen: false })
+  }
+
+  clickDelete(imageId) {
+    let { imagesDelete } = this.state
+    if (imagesDelete.indexOf(imageId) === -1) {
+      this.setState({ imagesDelete: [...imagesDelete, imageId] })
+    } else {
+      let newDeletes = imagesDelete.filter(id => id !== imageId)
+      this.setState({ imagesDelete: newDeletes })
+    }
+  }
+
+  deleteImages() {
+    
+  }
+
   renderView() {
-    const { view, imageData, largeImageData, snackbarOpen } = this.state
+    const { view, imageData, largeImageData, snackbarOpen, deleteMode } = this.state
     switch(view) {
       case 'home':
         return (
           <div className='app__home_container'>
-            <div>
+            <div className='app__home_controls_container'>
               <Search 
-                search={(value) => this.searchCaptions(value)}
+                search={value => this.searchCaptions(value)}
               />
-              
+              <div className='app__home_delete_controls'>
+                <Toggle
+                  style={{ width: '0%' }}
+                  label="Delete Mode"
+                  labelPosition="right"
+                  onToggle={() => this.toggleDeleteMode()}
+                  />
+                <RaisedButton
+                  style={{ marginLeft: '20px' }} 
+                  label='Delete Images'
+                  disabled={!deleteMode}
+                  onClick={() => this.deleteImages()}
+                />
+              </div>
             </div>
             <div className='app__home_thumbnail_container'>
               {imageData.map((item, id) => (
                 <ThumbNail
                   key={id}
                   data={item}
+                  deleteMode={deleteMode}
+                  clickDelete={imageId => this.clickDelete(imageId)}
                   changeView={imageId => this.changeView(imageId)}
                 />
               ))}
@@ -117,14 +150,14 @@ class App extends Component {
             <ImageDetail
               data={largeImageData} 
               back={() => this.goBack()}
-              update={(newData) => this.updateImage(newData)}
+              update={newData => this.updateImage(newData)}
             />
             <Snackbar 
               className='app__imageDetails_snackbar'
               open={snackbarOpen}
               message="Image Caption and Title Updated"
               autoHideDuration={3000}
-              onRequestClose={() => this.setState({ snackbarOpen: false })}
+              onRequestClose={() => this.closeSnackBar()}
             />
           </div>
         )

@@ -1,0 +1,8 @@
+.thumbNail__container {
+  padding: 5px;
+  margin: 10px;
+}
+
+.thumbNail__delete_highlighted {
+  background-color: red;
+}

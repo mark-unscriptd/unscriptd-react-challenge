@@ -24,13 +24,13 @@ export default class Search extends Component {
 
   render() {
     return (
-      <form onSubmit={(e) => this.sendSearch(e)}>
+      <form onSubmit={e => this.sendSearch(e)}>
         <TextField
           value={this.state.value} 
           name='Search Input'
           type="text" 
           placeholder="Search Captions" 
-          onChange={(e) => this.onChangeHandler(e)}
+          onChange={e => this.onChangeHandler(e)}
         />
       </form>
     )
