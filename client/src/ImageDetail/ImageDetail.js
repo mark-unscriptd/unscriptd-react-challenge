@@ -32,9 +32,6 @@ export default class ImageDetail extends Component {
     let newData = {
       title: title,
       caption: caption,
-      display_sizes: imageData.display_sizes,
-      artist: imageData.artist,
-      date_created: imageData.date_created,
       id: imageData.id
     }
     this.props.update(newData)

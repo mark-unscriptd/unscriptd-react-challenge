@@ -4,7 +4,6 @@ import ImageDetail from './ImageDetail/ImageDetail';
 import Search from './Search/Search';
 import Snackbar from 'material-ui/Snackbar';
 import Toggle from 'material-ui/Toggle';
-import RaisedButton from 'material-ui/RaisedButton';
 import './App.css';
 const DB_URL = 'http://localhost:3010/images/';
 
@@ -17,8 +16,7 @@ class App extends Component {
       view: 'home',
       largeImageData: '',
       snackbarOpen: false,
-      deleteMode: false,
-      imagesDelete: []
+      deleteMode: false
     }
   }
 
@@ -52,7 +50,7 @@ class App extends Component {
 
   updateImage(newData) {
     fetch(DB_URL + newData.id, {
-      method: 'PUT',
+      method: 'PATCH',
       body: JSON.stringify(newData),
       headers: {
         'Content-Type': 'application/json'
@@ -85,7 +83,10 @@ class App extends Component {
 
   toggleDeleteMode() {
     let { deleteMode } = this.state
-    this.setState({ deleteMode: !deleteMode })
+    this.setState({ 
+      deleteMode: !deleteMode,
+      imagesDelete: []
+    })
   }
 
   closeSnackBar() {
@@ -93,17 +94,17 @@ class App extends Component {
   }
 
   clickDelete(imageId) {
-    let { imagesDelete } = this.state
-    if (imagesDelete.indexOf(imageId) === -1) {
-      this.setState({ imagesDelete: [...imagesDelete, imageId] })
-    } else {
-      let newDeletes = imagesDelete.filter(id => id !== imageId)
-      this.setState({ imagesDelete: newDeletes })
-    }
-  }
-
-  deleteImages() {
-    
+    const { imageData } = this.state
+    fetch(DB_URL + imageId, {
+      method: 'DELETE'
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Deleted image with id: ', imageId);
+      }
+      let newImageData = imageData.filter(data => data.id !== imageId)
+      this.setState({ imageData: newImageData })
+    })
   }
 
   renderView() {
@@ -122,12 +123,7 @@ class App extends Component {
                   label="Delete Mode"
                   labelPosition="right"
                   onToggle={() => this.toggleDeleteMode()}
-                  />
-                <RaisedButton
-                  style={{ marginLeft: '20px' }} 
-                  label='Delete Images'
-                  disabled={!deleteMode}
-                  onClick={() => this.deleteImages()}
+                  toggled={deleteMode}
                 />
               </div>
             </div>
@@ -167,7 +163,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         {this.renderView()}

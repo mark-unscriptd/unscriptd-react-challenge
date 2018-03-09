@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import IconButton from 'material-ui/IconButton';
 import './ThumbNail.css'
 
 export default class ThumbNail extends Component {
@@ -11,26 +12,31 @@ export default class ThumbNail extends Component {
   }
 
   componentWillReceiveProps(props) {
-    if (!props.deleteMode) { this.setState({ highlighted: false }) }
+    props.deleteMode ? this.setState({ highlighted: true }) : this.setState({ highlighted: false }) 
   }
 
   handleClick() {
-    const { deleteMode, changeView, clickDelete, data } = this.props
-    let { highlighted } = this.state
-    if (deleteMode) {
-      this.setState({ highlighted: !highlighted })
-      clickDelete(data.id)
-    } else {
-      this.setState({ highlighted: false })
+    const { deleteMode, changeView, data } = this.props
+    if (!deleteMode) {
       changeView(data.id)
     } 
   }
 
+  handleDeleteClick() {
+    const { data, clickDelete } = this.props
+    this.setState({ highlighted: false })
+    clickDelete(data.id)
+  }
+
   render() {
-    const { data, deleteMode } = this.props
+    const { data } = this.props
     const thumbNailUri = data.display_sizes.filter(size => size.name === 'thumb')[0].uri
     return (
-      <div className={'thumbNail__container' + ' ' + (this.state.highlighted ? 'thumbNail__delete_highlighted' : '' )} >
+      <div className={`thumbNail__container ${this.state.highlighted ? 'thumbNail__delete_highlighted' : '' }`} >
+        {this.state.highlighted ? 
+        <IconButton className='thumbNail__close_icon' onClick={() => this.handleDeleteClick()}>
+          <i className="material-icons">close</i>
+        </IconButton> : null}
         <img
           onClick={() => this.handleClick()} 
           src={thumbNailUri} 
