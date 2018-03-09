@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Spin} from 'antd'
+import { Card, Spin } from 'antd'
 import {ImageThumbnailList} from '../compoents/ImageThumbnailList'
 const { Meta } = Card
 class ImageThumbnailListContainer extends Component {
@@ -11,18 +11,19 @@ class ImageThumbnailListContainer extends Component {
 
   render () {
     const {imagesList} = this.props
-    return    <div>
-    {
-      imagesList ?(
-       
-       <ImageThumbnailList imagesList={imagesList}/>)
-        :(
-          <div>
-          <p>Loading</p>
-          <Spin />
-          </div>
-        )
-    }
+    return <div>
+      {
+        imagesList ? (
+
+          <ImageThumbnailList imagesList={imagesList} />)
+
+          : (
+            <div>
+              <p>Loading</p>
+              <Spin />
+            </div>
+          )
+      }
     </div>
   }
 }

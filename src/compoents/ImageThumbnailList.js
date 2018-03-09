@@ -1,42 +1,37 @@
 import React, { Component } from 'react'
-import { List, Card  } from 'antd'
-import 'antd/dist/antd.css';
+import { List } from 'antd'
+import 'antd/dist/antd.css'
 export class ImageThumbnailList extends Component {
-
   render () {
-    const { Meta } = Card;
     const {imagesList} = this.props
-     let listData = imagesList.map(ele => {
-      return({
-        href: '/image/' + ele.id,
+    let listData = imagesList.map(ele => {
+      return ({
+        href: '/' + ele.id,
         title: ele.title,
-        description: ele.title,
-        imageThumb : ele.display_sizes[2].uri
+        description: ele.caption,
+        imageThumb: ele.display_sizes[2].uri
       })
     })
+    console.log(listData)
     return (
       <List
-        //itemLayout="vertical"
-        grid={{ gutter: 6, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 3 }}
+        itemLayout='vertical'
+        size='large'
         dataSource={listData}
         renderItem={item => (
-          <List.Item>
-            <Card
-              hoverable
-              style={{ width: 240}}
-              cover={<a href={item.href}><img className="thumb-image" alt={item.title} src={item.imageThumb} /></a>}
-            >
-              <Meta
-                title={<a href={item.href}>{item.title}</a>}
-              />
-            </Card>
+          <List.Item
+            key={item.title}
+            extra={<img width={272} alt='logo' src={item.imageThumb} />}
+          >
+            <List.Item.Meta
+              title={<a href={item.href}>{item.title}</a>}
+              description={item.description}
+            />
+            {item.content}
           </List.Item>
         )}
-      >
-  
-      </List>
+      />
 
-      
     )
   }
 }

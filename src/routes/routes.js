@@ -1,13 +1,13 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import React from 'react'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import Home from '../App';
-import ImageContainer from '../containers/ImageContainer';
+import App from '../App'
+import ImageContainer from '../containers/ImageDetailContainer'
 //      <Route path="/login" exact render={props => <Login {...props} />} />
 export default () =>
   (<BrowserRouter>
     <Switch>
-      <Route path="/" exact render={props => <Home {...props} />} />
-      <Route path="/image" render={props => <ImageContainer {...props} />} />
+      <Route path='/' exact render={props => <App {...props} />} />
+      <Route path='/' render={props => <ImageContainer {...props} />} />
     </Switch>
-  </BrowserRouter>);
+  </BrowserRouter>)
