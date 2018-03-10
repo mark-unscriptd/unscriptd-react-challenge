@@ -33,15 +33,13 @@ describe("Top page", () => {
     });
   });
 
-  it("searches photos", () => {
+  it("searches correct photos", () => {
     return axios.get("http://localhost:3010/images/?caption_like=Wade").then(res => {
       const numberOfObj = res.data.length;
       console.log(numberOfObj);
-      
-      expect.assertions(0);
-
-      
-      // expect(res.data[0].caption).toContain('Wade')
+      res.data.map((searchResult) => {
+        expect(searchResult.caption).toContain('Wade')
+      })
     });
   });
 });

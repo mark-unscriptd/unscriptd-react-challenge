@@ -2,7 +2,6 @@
   "name": "react-coding-challenge",
   "version": "1.0.0",
   "description": "A package containing a simple dummy media API, which should be used in the challenge",
-  "private": true,
   "scripts": {
     "dev": "react-scripts start",
     "start": "json-server --port 3010 --watch db.json",
