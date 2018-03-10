@@ -9,4 +9,5 @@ describe('App', () => {
   it('renders without crashing', () => {
     expect(mount(<App />).length).toEqual(1)
   });
+
 })
