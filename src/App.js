@@ -5,13 +5,16 @@ import { listPhotos, updatePhoto, searchPhotoByCaption, deletePhoto } from "./ap
 import PhotoDetails from "./components/PhotoDetails";
 import TopPageThumbs from "./components/TopPageThumbs";
 import SearchField from "./components/SearchField";
+import DeleteSwitch from "./components/DeleteSwitch";
+import ReactDOM from "react-dom";
 
 class App extends Component {
   state = {
     error: null,
     enteredWord: "",
     data: null,
-    selectedPhotos: []
+    selectedPhotos: [],
+    isSelectMode: false
   };
 
   componentDidMount() {
@@ -37,6 +40,7 @@ class App extends Component {
         this.setState(prevState => {
           const newData = prevState.data.map(m => {
             if (m.id === updatedPhoto.id) {
+              alert("data saved.");
               return updatedPhoto;
             } else {
               return m;
@@ -72,6 +76,8 @@ class App extends Component {
   clearSearch = () => {
     searchPhotoByCaption("").then(res => {
       this.setState({ data: res, error: null });
+      const searchTerm = document.getElementById('search-field')
+      searchTerm.value = ''
     });
   };
 
@@ -91,6 +97,26 @@ class App extends Component {
     }
   };
 
+  selectPhotosToggle = () => {
+    const currentState = this.state.isSelectMode;
+    const checkboxes = ReactDOM.findDOMNode(this).getElementsByClassName("checkbox");
+    this.setState({ isSelectMode: !currentState });
+
+    if (this.state.isSelectMode && this.state.selectedPhotos.length > 0) {
+      this.setState({ selectedPhotos: [] });
+      Array.from(checkboxes).map(box => {
+        box.checked = false;
+        return null
+      });
+    } 
+    else {
+      Array.from(checkboxes).map(box => {
+        box.checked = false;
+        return null
+      });
+    }
+  };
+
   deletePhotos = () => {
     let { selectedPhotos } = this.state;
     selectedPhotos.map(photo => {
@@ -106,7 +132,8 @@ class App extends Component {
   };
 
   render() {
-    const { data, error, selectedPhotos } = this.state;
+    const { data, error, selectedPhotos, isSelectMode } = this.state;
+
     return (
       <Router>
         <div className="App">
@@ -133,21 +160,26 @@ class App extends Component {
               exact
               render={() => (
                 <Fragment>
-                  <SearchField
-                    enteredWord={this.enteredWord}
-                    searchImage={this.searchImage}
-                    enteredWordHandler={this.enteredWordHandler}
-                    clearSearch={this.clearSearch}
-                  />
+                  <div className="tools">
+                    <SearchField
+                      enteredWord={this.enteredWord}
+                      searchImage={this.searchImage}
+                      enteredWordHandler={this.enteredWordHandler}
+                      clearSearch={this.clearSearch}
+                    />
+                    <DeleteSwitch
+                      data={data}
+                      selectPhotosToggle={this.selectPhotosToggle}
+                      deletePhotos={this.deletePhotos}
+                      isSelectMode={isSelectMode}
+                    />
+                  </div>
                   <TopPageThumbs
                     data={data}
-                    enteredWord={this.enteredWord}
-                    searchImage={this.searchImage}
-                    enteredWordHandler={this.enteredWordHandler}
-                    clearSearch={this.clearSearch}
                     selectedPhotos={selectedPhotos}
                     toggleTick={this.toggleTick}
                     deletePhotos={this.deletePhotos}
+                    isSelectMode={isSelectMode}
                   />
                 </Fragment>
               )}

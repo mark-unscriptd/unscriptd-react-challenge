@@ -27,8 +27,7 @@ describe("Top page", () => {
       const result = renderer.getRenderOutput();
 
       res.map((photo, index) => {
-        expect.assertions(index + 1);
-        expect("/" + photo.id).toEqual(result.props.children[0][index].props.children[1].props.to);
+        expect("/" + photo.id).toEqual(result.props.children[index].props.children[2].props.to);
       });
     });
   });
@@ -36,7 +35,6 @@ describe("Top page", () => {
   it("searches correct photos", () => {
     return axios.get("http://localhost:3010/images/?caption_like=Wade").then(res => {
       const numberOfObj = res.data.length;
-      console.log(numberOfObj);
       res.data.map((searchResult) => {
         expect(searchResult.caption).toContain('Wade')
       })
