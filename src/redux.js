@@ -9,9 +9,12 @@ const ID_DEL_REMOVE_LIST = 'ID_DEL_REMOVE_LIST'
 const API_DEL_REQUEST = 'API_DEL_REQUEST'
 const API_DEL_SUCCESS = 'API_DEL_SUCCESS'
 const API_DEL_FAILURE = 'API_DEL_FAILURE'
+const API_UPDATE_RESET = 'API_UPDATE_RESET'
+const API_DEL_RESET = 'API_DEL_RESET'
 // reducer with initial state
 const initialState = {
   postSuccess: null,
+  delSuccess: null,
   imagesList: null,
   error: null,
   idDelList: []
@@ -46,6 +49,11 @@ export function reducer (state = initialState, action) {
       ...state,
       postSuccess: 0
     }
+  } else if (action.type === API_UPDATE_RESET) {
+    return {
+      ...state,
+      postSuccess: null
+    }
   } else if (action.type === ID_DEL_ADD_LIST) {
     return {
       ...state,
@@ -59,12 +67,20 @@ export function reducer (state = initialState, action) {
   } else if (action.type === API_DEL_SUCCESS) {
     return {
       ...state,
+      delSuccess: 1,
       idDelList: []
     }
   } else if (action.type === API_DEL_FAILURE) {
     return {
       ...state,
+      delSuccess: 0,
       idDelList: []
     }
-  }else { return state }
+  } else if (action.type === API_DEL_RESET) {
+    return {
+      ...state,
+      delSuccess: null,
+      idDelList: []
+    }
+  } else { return state }
 }

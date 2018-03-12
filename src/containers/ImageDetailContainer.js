@@ -10,23 +10,28 @@ class ImageContainer extends Component {
   }
 
   render () {
-    const { imagesList, history } = this.props
-    let listData
+    const { imagesList, history, postSuccess, resetUpdateStatus } = this.props
     let filterListData
+    let MsgInfo = () => (null)
+    const successMsg = () => {
+      message.success('Update Success')
+      resetUpdateStatus()
+      return null
+    }
+    const errorMsg = () => {
+      message.error('Update Failure')
+      resetUpdateStatus()
+      return null
+    }
+    if (postSuccess === 1) {
+      MsgInfo = successMsg
+    } else if (postSuccess === 0) {
+      MsgInfo = errorMsg
+    }
     if (imagesList != null) {
       filterListData = imagesList.filter(ele => history.location.pathname === ('/' + ele.id))
-     /* listData = filterListData.map(ele => {
-        return {
-          id: ele.id,
-          title: ele.title,
-          description: ele.caption,
-          imageThumb: ele.display_sizes[2].uri,
-          artist: ele.artist,
-          date_created: ele.date_created
-        }
-      })*/
     }
-    console.log(filterListData)
+    console.log(postSuccess)
     return <div>
       {(filterListData)
         ? (
@@ -36,6 +41,7 @@ class ImageContainer extends Component {
       }
 
       <Button size='large' onClick={() => history.push('/')}>Back</Button>
+      <MsgInfo />
     </div>
   }
 }
@@ -57,6 +63,9 @@ const mapDispatchToProps = dispatch => {
     updateImage: (payload = null) => dispatch(
       { type: 'API_UPDATE_REQUEST',
         imageContent: payload
+      }),
+    resetUpdateStatus: () => dispatch(
+      { type: 'API_UPDATE_RESET'
       })
   }
 }

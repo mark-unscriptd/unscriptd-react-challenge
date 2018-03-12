@@ -22,9 +22,9 @@
   font-size: large;
 }
 
-.thumb-image{
-  width : 240px;
-  height : 160px;
+.image-title *{
+  display:block;
+  margin:auto;
 }
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
