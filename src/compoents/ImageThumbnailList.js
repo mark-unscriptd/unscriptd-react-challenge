@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { List, Checkbox } from 'antd'
 import 'antd/dist/antd.css'
 import { connect } from 'react-redux'
+import {ID_DEL_ADD_LIST, ID_DEL_REMOVE_LIST} from '../actionTypes'
 class ImageThumbnailList extends Component {
   constructor (props) {
     super(props)
@@ -54,11 +55,11 @@ const mapStateToProps = null
 const mapDispatchToProps = dispatch => {
   return {
     addToDelList: (payload = null) => dispatch(
-      { type: 'ID_DEL_ADD_LIST',
+      { type: ID_DEL_ADD_LIST,
         payload: payload
       }),
     removeFromDelList: (payload = null) => dispatch(
-      { type: 'ID_DEL_REMOVE_LIST',
+      { type: ID_DEL_REMOVE_LIST,
         payload: payload
       })
   }

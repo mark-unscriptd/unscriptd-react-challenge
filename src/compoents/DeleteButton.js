@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Button } from 'antd'
+import { Button, message } from 'antd'
 import { connect } from 'react-redux'
-import { message } from 'antd/lib/index'
-
+import {API_DEL_REQUEST, API_DEL_RESET} from '../actionTypes'
 class DeleteButton extends Component {
   render () {
     const {delIdListed, idDelList, resetUpdateStatus, delSuccess} = this.props
@@ -22,7 +21,6 @@ class DeleteButton extends Component {
     } else if (delSuccess === 0) {
       MsgInfo = errorMsg
     }
-    console.log(idDelList)
     return (
       <div>
         {(idDelList.length)
@@ -43,11 +41,11 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     delIdListed: (payload) => dispatch(
-      { type: 'API_DEL_REQUEST',
+      { type: API_DEL_REQUEST,
         payload: payload
       }),
     resetUpdateStatus: () => dispatch(
-      { type: 'API_DEL_RESET'
+      { type: API_DEL_RESET
       })
   }
 }

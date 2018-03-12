@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import '../App.css'
+import {API_UPDATE_REQUEST} from '../actionTypes'
 class ImageDetail extends Component {
   constructor (props) {
     super(props)
@@ -65,8 +66,8 @@ const mapStateToProps = null
 const mapDispatchToProps = dispatch => {
   return {
     updateImage: (payload = null) => dispatch(
-      { type: 'API_UPDATE_REQUEST',
-        imageContent: payload
+      { type: API_UPDATE_REQUEST,
+        payload: payload
       })
   }
 }

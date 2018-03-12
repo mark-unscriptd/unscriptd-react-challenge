@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-// import Routes from './routes/routes'
 import ImageThumbnailListContainer from './containers/ImageThumbnailListContainer'
 import SearchInput from './compoents/SearchInput'
 import DeleteButton from './compoents/DeleteButton'

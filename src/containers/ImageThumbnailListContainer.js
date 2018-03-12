@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Spin } from 'antd'
 import ImageThumbnailList from '../compoents/ImageThumbnailList'
+import {API_CALL_REQUEST} from '../actionTypes'
 class ImageThumbnailListContainer extends Component {
   componentDidMount () {
     const {fetchImage} = this.props
@@ -37,7 +38,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchImage: () => dispatch(
-      { type: 'API_CALL_REQUEST',
+      { type: API_CALL_REQUEST,
         payload: null
       })
   }

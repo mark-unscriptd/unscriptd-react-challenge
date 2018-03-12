@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Input } from 'antd'
 import { connect } from 'react-redux'
+import {API_CALL_REQUEST} from '../actionTypes'
 const Search = Input.Search
 
 class SearchInput extends Component {
@@ -25,7 +26,7 @@ const mapStateToProps = null
 const mapDispatchToProps = dispatch => {
   return {
     fetchImage: (payload = null) => dispatch(
-      { type: 'API_CALL_REQUEST',
+      { type: API_CALL_REQUEST,
         payload: payload
       })
   }

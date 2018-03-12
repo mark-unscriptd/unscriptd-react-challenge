@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { message, Button } from 'antd'
 import ImageDetail from '../compoents/ImageDetail'
 import 'antd/dist/antd.css'
-class ImageContainer extends Component {
+import {API_CALL_REQUEST, API_UPDATE_REQUEST, API_UPDATE_RESET} from '../actionTypes'
+class ImageDetailContainer extends Component {
   componentDidMount () {
     const { fetchImage } = this.props
     fetchImage()
@@ -31,7 +32,6 @@ class ImageContainer extends Component {
     if (imagesList != null) {
       filterListData = imagesList.filter(ele => history.location.pathname === ('/' + ele.id))
     }
-    console.log(postSuccess)
     return <div>
       {(filterListData)
         ? (
@@ -57,17 +57,17 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchImage: (payload = null) => dispatch(
-      { type: 'API_CALL_REQUEST',
+      { type: API_CALL_REQUEST,
         payload: payload
       }),
     updateImage: (payload = null) => dispatch(
-      { type: 'API_UPDATE_REQUEST',
+      { type: API_UPDATE_REQUEST,
         imageContent: payload
       }),
     resetUpdateStatus: () => dispatch(
-      { type: 'API_UPDATE_RESET'
+      { type: API_UPDATE_RESET
       })
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImageContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ImageDetailContainer)
