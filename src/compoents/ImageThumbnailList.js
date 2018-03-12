@@ -1,7 +1,19 @@
 import React, { Component } from 'react'
-import { List } from 'antd'
+import { List, Checkbox } from 'antd'
 import 'antd/dist/antd.css'
-export class ImageThumbnailList extends Component {
+import { connect } from 'react-redux'
+class ImageThumbnailList extends Component {
+  constructor (props) {
+    super(props)
+    this.onChangeBox = this.onChangeBox.bind(this)
+  }
+  onChangeBox (e) {
+    const {addToDelList, removeFromDelList} = this.props
+
+    return ((e.target.checked)
+      ? (addToDelList(e.target.value))
+     : (removeFromDelList(e.target.value)))
+  }
   render () {
     const {imagesList} = this.props
     let listData = imagesList.map(ele => {
@@ -9,25 +21,26 @@ export class ImageThumbnailList extends Component {
         href: '/' + ele.id,
         title: ele.title,
         description: ele.caption,
-        imageThumb: ele.display_sizes[2].uri
+        imageThumb: ele.imageThumb
       })
     })
-    console.log(listData)
+
     return (
       <List
-        itemLayout='vertical'
+       // grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 2 }}
+        itemLayout='horizontal'
         size='large'
         dataSource={listData}
         renderItem={item => (
           <List.Item
-            key={item.title}
-            extra={<img width={272} alt='logo' src={item.imageThumb} />}
+            key={item.description}
+            extra={item.description}
           >
             <List.Item.Meta
-              title={<a href={item.href}>{item.title}</a>}
-              description={item.description}
+              description={<a href={item.href}>{item.title}</a>}
+              title={<a href={item.href}><img width={272} alt='logo' src={item.imageThumb} /></a>}
+              avatar={<Checkbox value={item.href} onChange={this.onChangeBox} />}
             />
-            {item.content}
           </List.Item>
         )}
       />
@@ -35,3 +48,20 @@ export class ImageThumbnailList extends Component {
     )
   }
 }
+
+const mapStateToProps = null
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToDelList: (payload = null) => dispatch(
+      { type: 'ID_DEL_ADD_LIST',
+        payload: payload
+      }),
+    removeFromDelList: (payload = null) => dispatch(
+      { type: 'ID_DEL_REMOVE_LIST',
+        payload: payload
+      })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ImageThumbnailList)

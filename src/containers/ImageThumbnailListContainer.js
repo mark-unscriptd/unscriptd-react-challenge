@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Spin } from 'antd'
-import {ImageThumbnailList} from '../compoents/ImageThumbnailList'
-const { Meta } = Card
+import { Spin } from 'antd'
+import ImageThumbnailList from '../compoents/ImageThumbnailList'
 class ImageThumbnailListContainer extends Component {
   componentDidMount () {
     const {fetchImage} = this.props

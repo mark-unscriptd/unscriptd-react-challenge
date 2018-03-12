@@ -3,6 +3,8 @@ import logo from './logo.svg'
 import './App.css'
 // import Routes from './routes/routes'
 import ImageThumbnailListContainer from './containers/ImageThumbnailListContainer'
+import SearchInput from './compoents/SearchInput'
+import DeleteButton from './compoents/DeleteButton'
 
 class App extends Component {
   render () {
@@ -14,7 +16,9 @@ class App extends Component {
           <h1 className='App-title'>Welcome to React</h1>
         </header>
         <p>Here is the images we fetched from the server</p>
+        <SearchInput />
         <ImageThumbnailListContainer />
+        <DeleteButton />
       </div>
     )
   }
