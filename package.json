@@ -1,4 +1,3 @@
-
 {
   "name": "react-coding-challenge",
   "version": "1.0.0",
@@ -6,10 +5,16 @@
   "scripts": {
     "start": "json-server --port 3010 --watch db.json"
   },
-  "keywords": ["react challenge", "tryouts", "react developer", "hiring"],
+  "keywords": [
+    "react challenge",
+    "tryouts",
+    "react developer",
+    "hiring"
+  ],
   "author": "Unscriptd Ltd",
   "license": "ISC",
   "devDependencies": {
     "json-server": "0.10.1"
-  }
+  },
+  "dependencies": {}
 }

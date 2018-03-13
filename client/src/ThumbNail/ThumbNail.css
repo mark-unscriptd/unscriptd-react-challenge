@@ -1,0 +1,23 @@
+.thumbNail__container {
+  padding: 5px;
+  margin: 10px;
+  position: relative;
+}
+
+.thumbNail__delete_highlighted {
+  background-color: red;
+}
+
+.thumbNail__close_icon {
+  position: absolute !important;
+  top: 8%;
+  right: 6%;
+  background-color: white !important;
+  height: 30px !important;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.material-icons {
+  font-size: 18px !important;
+}

@@ -40,3 +40,7 @@ API can be launched using `npm start`. You will need to run `npm install` once s
 
 More info about API usage can be found at the [json-server
 repo](https://github.com/typicode/json-server).
+
+# My Challenge Submission in the Client Folder
+
+Run the client using `npm start` from within the folder. This is to be run conjointly with the API also using `npm start`.

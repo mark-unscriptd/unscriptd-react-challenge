@@ -1,0 +1,25 @@
+.app__home_container {
+  padding: 10px;
+}
+
+.app__home_controls_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.app__home_delete_controls {
+  display: flex;
+  align-items: center;
+}
+
+.app__home_thumbnail_container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.app__imageDetails_snackbar {
+  text-align: center;
+}
