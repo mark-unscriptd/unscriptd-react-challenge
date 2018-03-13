@@ -20,11 +20,12 @@ Extra
 ## API Usage
 
 API Methods and Endpoints used:
-'GET' /images
-'GET' /images/$id
-'GET' /images/?caption_like=$words
-'PATCH' /images/$id
-'DELETE' /images/$id
+
+* 'GET' /images
+* 'GET' /images/$id
+* 'GET' /images/?caption_like=$words
+* 'PATCH' /images/$id
+* 'DELETE' /images/$id
 
 ## Libraries and Tools Used
 
@@ -34,10 +35,15 @@ API Methods and Endpoints used:
 
 ## Development Decisions
 
+* I initially decided to keep the client and API as 2 separate applications. That is the reason for the client folder.
 * The Delete API method could only delete 1 image ID at a time. I used a toggle to give all images the ability to delete by ID.
 * Used a Material-UI Snackbar to show confirmation when an image title or caption is updated.
 * Typing in the search box and pressing the enter key will utilize the API to search the captions and filter the images. Once the search box is empty, all images from the API will be displayed.
 * I used the Delete method to remove images from the JSON database. I decided to do this over storing and deleting from app state because it is a permanent change. I have included a copy of the original JSON database in the parent folder. 
+
+## Testing
+
+I've added a single test case to check for data when making the API call. The test is using Jest which comes prepackaged in Create-React-App. 
 
 ## Outcomes
 
