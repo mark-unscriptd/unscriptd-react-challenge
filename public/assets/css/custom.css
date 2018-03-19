@@ -1,0 +1,310 @@
+table {
+    margin: 0 auto;
+
+}
+
+.m-b-10 {
+    margin-bottom: 10px;
+
+}
+
+.m-b-30 {
+    margin-bottom: 30px;
+
+}
+
+
+.m-t-10 {
+    margin-top: 10px;
+
+}
+
+.m-b-0 {
+    margin-bottom: 0;
+}
+
+.p-t-5 {
+    padding-top: 5px;
+
+}
+
+.p-7 {
+    padding: 7px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+
+.card-inverse {
+    color: rgba(255,255,255,.85);
+    background: #333;
+    border-radius: 4px;
+
+}
+
+.bg-gray {
+    background: #f5f5f6;
+}
+
+
+.no-border {
+    border: 0;
+    border-radius: 0;
+}
+
+/* .card-block button{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    
+    } */
+
+.card-block:hover button { 
+    display: inline-block; 
+    opacity: 1;
+
+}
+
+.format-padding {
+    padding: 0 !important;
+}
+
+.card-custom {
+    background: #fff;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.20);
+    border-color: #777;
+    webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    margin:0 5px 30px 5px !important;
+    height: 250px;
+}
+
+
+.vertical-bottom {
+    position: relative !important;
+    bottom: 0px;
+    
+    }
+
+.img-thumbnail {
+    background: transparent;
+    height: 100px !important;
+}
+
+.header {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 8px 7px;
+}
+
+.w-300 {
+    font-weight: 300;
+}
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-bottom: .5rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    line-height: 1.1;
+    color: #434648;
+}
+
+.h4, h4 {
+    font-size: 20px;
+    padding: 5px 20px;
+}
+
+/* 
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+}
+
+.card-block:hover .overlay {
+    opacity: 1;
+} */
+
+.h5, h5 {
+    font-size: 16px;
+}
+
+ 
+/* .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px 0;
+    border: 1px solid #888;
+    max-width: 400px;
+}
+
+
+.modal-footer {
+    padding: 0 15px;
+    border-top: 1px solid white;
+
+}
+
+.modal-body {
+    padding: 5px 15px;
+} */
+
+.padding-15 {
+    padding: 0 15px;
+}
+
+.font-13 {
+    font-size: 13px;
+}
+
+.m-t-30 {
+    margin-top: 30px;
+}
+
+.m-30 {
+    margin: 30px 0;
+}
+
+textarea{
+   resize: none; 
+   overflow-y: scroll;
+}
+
+.height-200 {
+    max-height: 200px;
+    min-height: 150px;
+}
+
+.with-border {
+    border: 1px solid #cec8c8 !important;
+    padding: 5px !important;
+    height: 200px;
+    border-radius: 4px;
+}
+
+.btn-default {
+    min-width: 75px;
+}
+
+.btn-edit i {
+    font-size: 20px;
+    color: #0362dd;
+}
+
+.btn-default.btn-edit {
+    min-width: 20px !important;
+}
+
+textarea.text-justify {
+    text-align: justify;
+    white-space: normal;
+}
+
+.btn-default:hover i {
+    font-size: 23px;
+}
+
+.border-success {
+    border: 1px solid #4c984c;
+    color: #4c984c;
+}
+
+.border-success {
+    border: 1px solid #4c984c;
+    color: #4c984c;
+}
+
+.border-danger {
+    border: 1px solid #c20404;
+    color: #c20404;
+}
+
+.btn.disabled,.btn.disabled:hover {
+    color: grey;
+    border: 1px solid grey;
+}
+
+.border-success:hover {
+    background: #4c984c;
+    color: white;
+    border: 1px solid #4c984c;
+}
+
+.border-danger:hover {
+    border: 1px solid #c20404;
+    color: white;
+    background: #c20404;
+}
+
+.border-primary {
+    color: #0390dd;
+    border: 1px solid #0390dd;
+}
+
+.border-primary:hover {
+    border: 1px solid #0390dd  !important;
+    color: white;
+    background: #0390dd  !important;
+}
+
+.btn-default:hover{
+    color: white;
+    border: 1px solid grey;
+    background: gray;
+}
+
+.btn-edit.btn-default:hover{
+    color: black;
+    background-color: transparent;
+    border: transparent;
+}
+
+.display-none{
+    display: none;
+}
+
+.search-bar {
+    padding: 7px 12px;
+    margin-right: 5px;
+    border: transparent;
+        border-bottom-width: medium;
+        border-bottom-style: none;
+        border-bottom-color: transparent;
+    border-bottom: 1px solid #cbc9c9;
+    width: 80%;
+}
+
+.vertical-middle {
+    position: absolute;
+    bottom: 35px;
+}
+
+.colour-selected {
+    background: #cae8fb;
+}

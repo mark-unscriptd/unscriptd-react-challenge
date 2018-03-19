@@ -1,15 +1,35 @@
-
 {
   "name": "react-coding-challenge",
   "version": "1.0.0",
   "description": "A package containing a simple dummy media API, which should be used in the challenge",
   "scripts": {
-    "start": "json-server --port 3010 --watch db.json"
+    "webpack": "webpack",
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production",
+    "watch": "webpack --watch --mode development",
+    "build": "rm -rf public/dist && mkdir public/dist && npm run prod",
+    "server-start": "json-server --port 3010 --watch db.json"
   },
-  "keywords": ["react challenge", "tryouts", "react developer", "hiring"],
+  "keywords": [
+    "react challenge",
+    "tryouts",
+    "react developer",
+    "hiring"
+  ],
   "author": "Unscriptd Ltd",
   "license": "ISC",
   "devDependencies": {
-    "json-server": "0.10.1"
+    "json-server": "0.10.1",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.10"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.2.0"
   }
 }
