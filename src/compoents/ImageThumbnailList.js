@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { List, Checkbox } from 'antd'
 import 'antd/dist/antd.css'
-import { connect } from 'react-redux'
-import {ID_DEL_ADD_LIST, ID_DEL_REMOVE_LIST} from '../actionTypes'
-class ImageThumbnailList extends Component {
+export default class ImageThumbnailList extends Component {
   constructor (props) {
     super(props)
     this.onChangeBox = this.onChangeBox.bind(this)
@@ -13,7 +12,7 @@ class ImageThumbnailList extends Component {
 
     return ((e.target.checked)
       ? (addToDelList(e.target.value))
-     : (removeFromDelList(e.target.value)))
+      : (removeFromDelList(e.target.value)))
   }
   render () {
     const {imagesList} = this.props
@@ -28,7 +27,7 @@ class ImageThumbnailList extends Component {
 
     return (
       <List
-       // grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 2 }}
+        // grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6, xxl: 2 }}
         itemLayout='horizontal'
         size='large'
         dataSource={listData}
@@ -49,20 +48,6 @@ class ImageThumbnailList extends Component {
     )
   }
 }
-
-const mapStateToProps = null
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addToDelList: (payload = null) => dispatch(
-      { type: ID_DEL_ADD_LIST,
-        payload: payload
-      }),
-    removeFromDelList: (payload = null) => dispatch(
-      { type: ID_DEL_REMOVE_LIST,
-        payload: payload
-      })
-  }
+ImageThumbnailList.propTypes = {
+  imagesList: PropTypes.array
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageThumbnailList)

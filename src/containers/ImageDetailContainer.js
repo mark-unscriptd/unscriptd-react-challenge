@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { message, Button } from 'antd'
 import ImageDetail from '../compoents/ImageDetail'
@@ -11,7 +12,7 @@ class ImageDetailContainer extends Component {
   }
 
   render () {
-    const { imagesList, history, postSuccess, resetUpdateStatus } = this.props
+    const {imagesList, history, postSuccess, resetUpdateStatus, updateImage} = this.props
     let filterListData
     let MsgInfo = () => (null)
     const successMsg = () => {
@@ -35,7 +36,7 @@ class ImageDetailContainer extends Component {
     return <div>
       {(filterListData)
         ? (
-          <ImageDetail listData={filterListData[0]} />
+          <ImageDetail listData={filterListData[0]} updateImage={updateImage} />
         )
         : (<p>Loading</p>)
       }
@@ -45,7 +46,9 @@ class ImageDetailContainer extends Component {
     </div>
   }
 }
-
+ImageDetailContainer.propTypes = {
+  imagesList: PropTypes.array
+}
 const mapStateToProps = state => {
   return {
     imagesList: state.imagesList,
@@ -62,7 +65,7 @@ const mapDispatchToProps = dispatch => {
       }),
     updateImage: (payload = null) => dispatch(
       { type: API_UPDATE_REQUEST,
-        imageContent: payload
+        payload: payload
       }),
     resetUpdateStatus: () => dispatch(
       { type: API_UPDATE_RESET

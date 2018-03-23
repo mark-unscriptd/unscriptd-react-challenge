@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Spin } from 'antd'
 import ImageThumbnailList from '../compoents/ImageThumbnailList'
-import {API_CALL_REQUEST} from '../actionTypes'
+import {API_CALL_REQUEST, ID_DEL_ADD_LIST, ID_DEL_REMOVE_LIST} from '../actionTypes'
 class ImageThumbnailListContainer extends Component {
   componentDidMount () {
     const {fetchImage} = this.props
@@ -40,6 +40,14 @@ const mapDispatchToProps = dispatch => {
     fetchImage: () => dispatch(
       { type: API_CALL_REQUEST,
         payload: null
+      }),
+    addToDelList: (payload = null) => dispatch(
+      { type: ID_DEL_ADD_LIST,
+        payload: payload
+      }),
+    removeFromDelList: (payload = null) => dispatch(
+      { type: ID_DEL_REMOVE_LIST,
+        payload: payload
       })
   }
 }

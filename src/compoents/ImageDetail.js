@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import '../App.css'
-import {API_UPDATE_REQUEST} from '../actionTypes'
-class ImageDetail extends Component {
+export default class ImageDetail extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -41,7 +40,7 @@ class ImageDetail extends Component {
         <br />
         <label>
             Date Created:
-            <input name='title' type='text' value={this.state.date_created} onChange={this.handleChange} />
+          <input name='title' type='text' value={this.state.date_created} onChange={this.handleChange} />
         </label>
         <br />
         <label>
@@ -54,22 +53,12 @@ class ImageDetail extends Component {
           <textarea name='caption' rows={6} cols={250} value={this.state.caption} onChange={this.handleChange} />
         </label>
         <br />
-        <input type='submit' value='Save' />
+        <input className='btn-submit-only' type='submit' value='Save' />
       </form>
 
     )
   }
 }
-
-const mapStateToProps = null
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateImage: (payload = null) => dispatch(
-      { type: API_UPDATE_REQUEST,
-        payload: payload
-      })
-  }
+ImageDetail.propTypes = {
+  listData: PropTypes.object
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(ImageDetail)
