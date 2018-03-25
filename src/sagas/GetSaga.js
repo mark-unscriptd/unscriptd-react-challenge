@@ -7,7 +7,7 @@ export function * WatcherGetSaga () {
 }
 
 // function that makes the api request and returns a Promise for response
-function fetchImages (payload = null) {
+export function fetchImages (payload = null) {
   let url
   payload ? (url = 'http://localhost:3010/images/' + payload)
     : url = 'http://localhost:3010/images'
@@ -18,7 +18,7 @@ function fetchImages (payload = null) {
   })
 }
 
-function reconstructData (imagesList) {
+export function reconstructData (imagesList) {
   let reImagesList = imagesList.map(ele => {
     return {
       ...ele,
@@ -29,11 +29,10 @@ function reconstructData (imagesList) {
   return reImagesList
 }
 // worker saga: makes the api call when watcher saga sees the action
-function * workerSaga (action) {
+export function * workerSaga (action) {
   try {
     const response = yield call(fetchImages, action.payload)
-    const imagesList = reconstructData(response.data)
-    // dispatch a success action to the store with the new dog
+    const imagesList = yield call(reconstructData, response.data)
     yield put({ type: API_CALL_SUCCESS, imagesList })
   } catch (error) {
     // dispatch a failure action to the store with the error

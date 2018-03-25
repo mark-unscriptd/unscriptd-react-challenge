@@ -1,5 +1,5 @@
 import React from 'react'
-import DeleteButton from '../Compoents/DeleteButton'
+import DeleteButton from '../../compoents/DeleteButton'
 import Enzyme, {shallow, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
@@ -16,7 +16,7 @@ describe('SearchFunction Test Suite', () => {
     expect(wrapper.find(DeleteButton).length).toEqual(1)
   })
 
-  it('+++ dispatch a callback funciton when clicked del button', () => {
+  it('+++ dispatch a callback function when clicked del button', () => {
     wrapper.find('.ant-btn').simulate('click')
     expect(myFnProp).toHaveBeenCalled()
   })

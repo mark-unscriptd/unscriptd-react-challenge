@@ -7,7 +7,7 @@ export function * WatcherDelSaga () {
 }
 
 // function that makes the api request and returns a Promise for response
-function delImages (payload = null) {
+export function delImages (payload = null) {
   let url
   payload ? (url = 'http://localhost:3010/images' + payload)
     : (url = null)
@@ -19,10 +19,9 @@ function delImages (payload = null) {
 }
 
 // worker saga: makes the api call when watcher saga sees the action
-function * workerSaga (action) {
+export function * workerSaga (action) {
   try {
     for (let i = 0; i < action.payload.length; i++) {
-      console.log(action.payload[i] + 'Deleting')
       yield call(delImages, action.payload[i])
     }
     // dispatch a success action to the store with the new dog

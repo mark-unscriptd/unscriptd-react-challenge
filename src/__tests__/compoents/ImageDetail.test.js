@@ -1,5 +1,5 @@
 import React from 'react'
-import ImageDetail from '../Compoents/ImageDetail'
+import ImageDetail from '../../compoents/ImageDetail'
 import Enzyme, {shallow, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
@@ -16,7 +16,7 @@ describe('SearchFunction Test Suite', () => {
     expect(wrapper.find(ImageDetail).length).toEqual(1)
   })
 
-  it('+++ dispatch a callback funciton when clicked submit', () => {
+  it('+++ dispatch a callback function when clicked submit', () => {
     wrapper.find('.image-title').simulate('submit', {
       preventDefault: () => {
       }

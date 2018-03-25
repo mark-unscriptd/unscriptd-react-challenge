@@ -7,7 +7,7 @@ export function * WatcherPostSaga () {
 }
 
 // function that makes the api request and returns a Promise for response
-function fetchImages (payload = null) {
+export function fetchImages (payload = null) {
   let url
   payload ? (url = 'http://localhost:3010/images/' + payload.id)
     : url = null
@@ -22,7 +22,7 @@ function fetchImages (payload = null) {
 }
 
 // worker saga: makes the api call when watcher saga sees the action
-function * workerSaga (action) {
+export function * workerSaga (action) {
   try {
     yield call(fetchImages, action.payload)
     yield put({type: API_UPDATE_SUCCESS})

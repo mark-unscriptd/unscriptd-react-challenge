@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from '../App'
+import App from '../../App'
 import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 import Enzyme, {shallow, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import ImageThumbnailListContainer from '../containers/ImageThumbnailListContainer'
-import SearchInput from '../compoents/SearchInput'
-import DeleteButton from '../compoents/DeleteButton'
+import ImageThumbnailListContainer from '../../containers/ImageThumbnailListContainer'
+import SearchInput from '../../compoents/SearchInput'
+import DeleteButton from '../../compoents/DeleteButton'
 Enzyme.configure({ adapter: new Adapter() })
 describe('renders without crashing', () => {
   const initialState = {

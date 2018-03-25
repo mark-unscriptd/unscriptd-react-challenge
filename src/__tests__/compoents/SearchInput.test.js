@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchInput from '../Compoents/SearchInput'
+import SearchInput from '../../compoents/SearchInput'
 import Enzyme, {shallow, mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 Enzyme.configure({ adapter: new Adapter() })
@@ -15,7 +15,7 @@ describe('SearchFunction Test Suite', () => {
     expect(wrapper.find(SearchInput).length).toEqual(1)
   })
 
-  it('+++ dispatch a callback funciton when clicked search icon', () => {
+  it('+++ dispatch a callback function when clicked search icon', () => {
     wrapper.find('.ant-btn').simulate('click')
     expect(myFnProp).toHaveBeenCalled()
   })

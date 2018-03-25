@@ -10,12 +10,12 @@ class ImageThumbnailListContainer extends Component {
   }
 
   render () {
-    const {imagesList} = this.props
+    const {imagesList, addToDelList, removeFromDelList} = this.props
     return <div>
       {
         imagesList ? (
 
-          <ImageThumbnailList imagesList={imagesList} />)
+          <ImageThumbnailList imagesList={imagesList} addToDelList={addToDelList} removeFromDelList={removeFromDelList} />)
 
           : (
             <div>
