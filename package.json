@@ -1,15 +1,38 @@
-
 {
   "name": "react-coding-challenge",
   "version": "1.0.0",
   "description": "A package containing a simple dummy media API, which should be used in the challenge",
-  "scripts": {
-    "start": "json-server --port 3010 --watch db.json"
+  "dependencies": {
+    "antd": "^3.2.3",
+    "axios": "^0.18.0",
+    "jest-cli": "^22.4.3",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
   },
-  "keywords": ["react challenge", "tryouts", "react developer", "hiring"],
+  "keywords": [
+    "react challenge",
+    "tryouts",
+    "react developer",
+    "hiring"
+  ],
   "author": "Unscriptd Ltd",
   "license": "ISC",
+  "scripts": {
+    "start": "json-server --port 3010 --watch db.json | react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
   "devDependencies": {
-    "json-server": "0.10.1"
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "json-server": "0.10.1",
+    "redux-mock-store": "^1.5.1"
   }
 }
