@@ -13,7 +13,7 @@ const Splash = props => {
                 <h1 style={styles.text}>TODAY'S FEATURED GAME:</h1>
                 <h1 style={{ ...styles.text, ...styles.title }}>MIAMI HEAT vs WASHINGTON WIZARDS</h1>
                 <p style={{ ...styles.text, marginTop: '100px', alignSelf: 'center', fontSize: '32px', color: '#EEE', letterSpacing: 4 }}>Highlights:</p>
-                <Link to="gallery" smooth={true} offset={50} duration={500} style={{ alignSelf: 'center' }}>
+                <Link to="gallery" smooth={true} offset={-50} duration={500} style={{ alignSelf: 'center' }}>
                     <Button
                         className="hoverable"
                         classes={{ root: classes.button }}
@@ -33,7 +33,7 @@ const styles = {
         minHeight: 'calc(100vh - 50px)',
         display: 'flex',
         flexDirection: 'column',
-        top: 50,
+        marginTop: 50,
         padding: '0 32px',
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${background})`,
         backgroundSize: 'cover',
@@ -49,7 +49,7 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: '0 auto'
+        margin: '64px auto'
     },
     text: {
         color: '#FFF'

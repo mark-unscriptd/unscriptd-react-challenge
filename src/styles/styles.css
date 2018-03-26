@@ -12,3 +12,12 @@
 .hoverable:hover {
   transform: scale(1.1);
 }
+
+.image {
+  opacity: 0.8;
+  transition: all 0.2s ease-in-out;
+}
+
+.image:hover {
+  opacity: 1;
+}

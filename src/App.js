@@ -3,7 +3,8 @@ import './styles/styles.css';
 import { Element } from 'react-scroll';
 import TopBar from './components/TopBar';
 import Splash from './components/Splash';
-import Gallery from './components/Gallery';
+import Highlights from './components/Highlights';
+import Footer from './components/Footer';
 
 class App extends Component {
     render() {
@@ -12,8 +13,9 @@ class App extends Component {
                 <TopBar />
                 <Splash />
                 <Element name="gallery">
-                    <Gallery />
+                    <Highlights />
                 </Element>
+                <Footer />
             </div>
         );
     }

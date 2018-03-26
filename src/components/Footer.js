@@ -1,12 +1,12 @@
 import React from 'react';
 import Logo from '../images/logo.png';
+import { SocialIcon } from 'react-social-icons';
 
 export default props => (
     <div style={styles.container}>
         <div style={styles.content}>
-            <a href='https://www.unscriptd.com/' style={styles.logoContainer}>
-                <img alt="logo" src={Logo} style={styles.logo} />
-            </a>
+            <SocialIcon className='hoverable' url="https://www.linkedin.com/in/callistusystan" color='#999' style={styles.icon} />
+            <SocialIcon className='hoverable' url="https://github.com/callistusystan" color='#999' style={styles.icon} />
         </div>
     </div>
 );
@@ -17,8 +17,7 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        position: 'fixed',
-        backgroundColor: '#222',
+        backgroundColor: '#000',
         boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)',
         padding: '0 32px',
         zIndex: 100
@@ -26,15 +25,14 @@ const styles = {
     content: {
         minWidth: '300px',
         width: '60%',
-        height: 50,
+        height: 100,
         display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center'
     },
-    logoContainer: {
-        alignSelf: 'flex-end'
-    },
-    logo: {
-        height: 38,
-        width: 'auto'
+    icon: {
+        margin: '0 32px',
+        width: 64,
+        height: 64
     }
 };
