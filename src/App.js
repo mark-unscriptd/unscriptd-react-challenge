@@ -1,21 +1,32 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './styles/styles.css';
+import { Element } from 'react-scroll';
+import TopBar from './components/TopBar';
+import Splash from './components/Splash';
+import Gallery from './components/Gallery';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div style={styles.page}>
+                <TopBar />
+                <Splash />
+                <Element name="gallery">
+                    <Gallery />
+                </Element>
+            </div>
+        );
+    }
 }
+
+const styles = {
+    page: {
+        minWidth: 392,
+        width: '100%',
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column'
+    }
+};
 
 export default App;

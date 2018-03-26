@@ -22,9 +22,13 @@
     "json-server": "0.10.1"
   },
   "dependencies": {
+    "lodash": "^4.17.5",
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-beta.36",
     "npm-run-all": "^4.1.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "^1.1.1"
+    "react-scripts": "^1.1.1",
+    "react-scroll": "^1.7.7"
   }
 }
