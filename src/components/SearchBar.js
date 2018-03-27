@@ -44,8 +44,7 @@ const styles = theme => ({
         border: '1px solid #ced4da',
         fontSize: 16,
         padding: '10px 12px',
-        boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)',
-        marginBottom: 8
+        boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)'
     }
 });
 
