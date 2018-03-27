@@ -22,6 +22,19 @@
     opacity: 1;
 }
 
+.link {
+    text-decoration: none;
+    color: #0066ff !important;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+
+.link:hover {
+    color: darkblue !important;
+    text-decoration: underline !important;
+}
+
 @media only screen and (min-width : 320px) and (max-width : 480px) {
 
     .content {

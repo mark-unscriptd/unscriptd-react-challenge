@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputAdornment, TextField } from 'material-ui';
-import { withStyles } from 'material-ui/styles';
 import { Search } from 'material-ui-icons'
+import { withStyles } from 'material-ui/styles';
 
 class SearchBar extends Component {
 
@@ -31,21 +31,26 @@ class SearchBar extends Component {
                                 <Search />
                             </InputAdornment>
                     }}
+                    endAdornment={
+                        <InputAdornment position="end">
+                            <Search />
+                        </InputAdornment>
+                    }
                     style={{ ...style }}
                 />
         );
     }
 }
 
-const styles = theme => ({
+const styles = {
     textFieldRoot: {
         flex: 1,
-        backgroundColor: theme.palette.common.white,
+        backgroundColor: '#FFF',
         border: '1px solid #ced4da',
         fontSize: 16,
         padding: '10px 12px',
         boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)'
     }
-});
+};
 
 export default withStyles(styles)(SearchBar);
