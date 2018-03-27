@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { CircularProgress } from 'material-ui';
+import { CircularProgress, Fade, IconButton } from 'material-ui';
 import SearchBar from './SearchBar';
+import { Done } from 'material-ui-icons';
 
 class Highlights extends Component {
     constructor(props) {
@@ -25,18 +26,24 @@ class Highlights extends Component {
     }
 
     renderImages = () => {
-        return this.state.images.map((img, i) => {
+        const { images } = this.state;
+        return images.map((img, i) => {
             const { artist, caption, date_created, display_sizes } = img;
             const [ comp, preview, thumb ] = display_sizes;
             return (
-                <div key={i} style={styles.imageContainer}>
-                    <img
-                        className='hoverable image'
-                        alt={`Thumbnail ${i}`}
-                        src={thumb.uri}
-                        style={styles.image}
-                    />
-                </div>
+                <Fade in timeout={i/images.length*500}>
+                    <div key={i} style={styles.imageContainer}>
+                        <IconButton style={{ position: 'absolute', top: 0, left: 0 }}>
+                            <Done />
+                        </IconButton>
+                        <img
+                            className='hoverable image'
+                            alt={`Thumbnail ${i}`}
+                            src={thumb.uri}
+                            style={styles.image}
+                        />
+                    </div>
+                </Fade>
             );
         });
     };
@@ -51,10 +58,12 @@ class Highlights extends Component {
     renderGallery = () => {
         if (this.state.images.length === 0) {
             return (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <h1 style={{ color: '#c0392b', fontSize: 60 }}>AIRBALL</h1>
-                    <h3 style={{ marginTop: 12 }}>No images matching search term!</h3>
-                </div>
+                <Fade in>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <h1 style={{ color: '#c0392b', fontSize: 60 }}>AIRBALL</h1>
+                        <h3 style={{ marginTop: 12 }}>No images matching search term!</h3>
+                    </div>
+                </Fade>
             )
         }
         return (
@@ -69,15 +78,15 @@ class Highlights extends Component {
 
     render() {
         return (
-            <div style={styles.container}>
+            <div style={{ ...styles.container, ...this.props.styles }}>
                 {
                     this.state.allImages.length === 0 ?
-                        <div style={{ ...styles.content, justifyContent: 'center' }}>
+                        <div className="content" style={{ ...styles.content, justifyContent: 'center' }}>
                             <CircularProgress/>
                         </div> :
-                        <div style={styles.content}>
-                            <h1 style={{ alignSelf: 'flex-start', marginBottom: 16 }}>Photos:</h1>
-                            <SearchBar onChange={this.onChange} style={{ alignSelf: 'flex-start' }} />
+                        <div className="content" style={styles.content}>
+                            <h1 style={{ color: '#444', alignSelf: 'flex-start' }}>Photos:</h1>
+                            <SearchBar onChange={this.onChange} style={{ margin: '8px 0px' }} />
                             {this.renderGallery()}
                         </div>
                 }
@@ -89,10 +98,10 @@ class Highlights extends Component {
 const styles = {
     container: {
         width: '100%',
-        minHeight: 'calc(100vh - 150px)',
-        backgroundColor: '#EEE',
+        flex: 1,
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: '#EEE'
     },
     content: {
         minWidth: '300px',
@@ -113,7 +122,8 @@ const styles = {
         alignItems: 'center',
         cursor: 'pointer',
         margin: 4,
-        backgroundColor: '#000'
+        backgroundColor: '#000',
+        position: 'relative'
     },
     image: {
         width: '100%',
@@ -121,7 +131,6 @@ const styles = {
         objectFit: 'cover'
     },
     gallery: {
-        marginTop: 16,
         display: 'flex',
         flexWrap: 'wrap',
         width: '100%'

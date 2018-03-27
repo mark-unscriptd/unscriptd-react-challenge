@@ -3,7 +3,7 @@ import Logo from '../images/logo.png';
 
 export default props => (
     <div style={styles.container}>
-        <div style={styles.content}>
+        <div className="content" style={styles.content}>
             <a href='https://www.unscriptd.com/' style={styles.logoContainer}>
                 <img alt="logo" src={Logo} style={styles.logo} />
             </a>
@@ -20,11 +20,9 @@ const styles = {
         position: 'fixed',
         backgroundColor: '#222',
         boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)',
-        padding: '0 32px',
         zIndex: 100
     },
     content: {
-        minWidth: '300px',
         width: '60%',
         height: 50,
         display: 'flex',

@@ -9,13 +9,13 @@ const Splash = props => {
     const { classes } = props;
     return (
         <div style={styles.container}>
-            <div style={styles.content}>
-                <h1 style={styles.text}>TODAY'S FEATURED GAME:</h1>
-                <h1 style={{ ...styles.text, ...styles.title }}>MIAMI HEAT vs WASHINGTON WIZARDS</h1>
-                <p style={{ ...styles.text, marginTop: '100px', alignSelf: 'center', fontSize: '32px', color: '#EEE', letterSpacing: 4 }}>Highlights:</p>
+            <div className="content" style={styles.content}>
+                <h1 className="heading" style={styles.text}>TODAY'S FEATURED GAME:</h1>
+                <h1 className="gameTitle" style={{ ...styles.text, ...styles.title }}>MIAMI HEAT vs WASHINGTON WIZARDS</h1>
+                <p className="highlightsHeading" style={{ ...styles.text, marginTop: '100px', alignSelf: 'center', fontSize: '32px', color: '#EEE', letterSpacing: 4 }}>Highlights:</p>
                 <Link to="gallery" smooth={true} offset={-50} duration={500} style={{ alignSelf: 'center' }}>
                     <Button
-                        className="hoverable"
+                        className="hoverable scrollButton"
                         classes={{ root: classes.button }}
                         variant="fab"
                     >
@@ -34,7 +34,6 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         marginTop: 50,
-        padding: '0 32px',
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(${background})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
@@ -43,13 +42,12 @@ const styles = {
         position: 'relative'
     },
     content: {
-        minWidth: '300px',
         width: '60%',
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        margin: '64px auto'
+        margin: '16px auto'
     },
     text: {
         color: '#FFF'
@@ -62,8 +60,8 @@ const styles = {
     button: {
         marginTop: 32,
         alignSelf: 'center',
-        minWidth: '96px !important',
-        minHeight: '96px !important'
+        width: '96px !important',
+        height: '96px !important'
     },
     icon: {
         height: 64,

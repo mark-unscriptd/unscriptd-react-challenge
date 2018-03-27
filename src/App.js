@@ -12,10 +12,12 @@ class App extends Component {
             <div style={styles.page}>
                 <TopBar />
                 <Splash />
-                <Element name="gallery">
-                    <Highlights />
-                </Element>
-                <Footer />
+                <div style={{ minHeight: 'calc(100vh - 50px)', display: 'flex', flexDirection: 'column' }}>
+                    <Element name="gallery" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                        <Highlights />
+                    </Element>
+                    <Footer />
+                </div>
             </div>
         );
     }
@@ -23,7 +25,6 @@ class App extends Component {
 
 const styles = {
     page: {
-        minWidth: 392,
         width: '100%',
         minHeight: '100vh',
         display: 'flex',
