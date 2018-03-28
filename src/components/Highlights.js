@@ -1,12 +1,14 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux'
 import { CircularProgress, IconButton, Modal, Tooltip } from 'material-ui';
 import { withStyles } from 'material-ui/styles';
-import { Delete, Close } from 'material-ui-icons';
+import { Delete } from 'material-ui-icons';
 import SearchBar from './SearchBar';
 import Gallery from './Gallery';
 import ImageView from './ImageView';
+import * as actions from '../actions';
+import { compose } from 'recompose';
 
 class Highlights extends Component {
     constructor(props) {
@@ -16,47 +18,23 @@ class Highlights extends Component {
             allImages: {},
             images: {},
             term: '',
-            clicked: undefined
+            clicked: undefined,
+            loaded: false
         };
 
-        axios.get('http://localhost:3010/images')
-            .then(({ data }) => {
-                this.setImages(data);
-            })
-            .catch(e => console.log(e));
+        this.props.getImages();
     }
 
-    setImages = data => {
-        const dataObj = _.keyBy(data, 'id');
-        this.setState({
-            allImages: dataObj,
-            images: dataObj
-        })
-    };
-
     onChange = term => {
-        const termUpper = term.toUpperCase();
-        this.setState({
-            images: _.keyBy(_.filter(this.state.allImages, img => img.caption.toUpperCase().includes(termUpper)), 'id')
-        })
+        const { searchImages } = this.props;
+        searchImages(term);
     };
 
     onImageSelectClick = id => {
-        this.setState({
-            images: {
-                ...this.state.images,
-                [id]: {
-                    ...this.state.images[id],
-                    selected: !this.state.images[id].selected
-                }
-            },
-            allImages: {
-                ...this.state.allImages,
-                [id]: {
-                    ...this.state.allImages[id],
-                    selected: !this.state.allImages[id].selected
-                }
-            },
+        const { images, toggleSelect } = this.props;
+        toggleSelect({
+            ...images[id],
+            selected: !images[id].selected
         });
     };
 
@@ -67,24 +45,31 @@ class Highlights extends Component {
     handleModalClose = () => this.setState({ clicked: undefined });
 
     handleDelete = () => {
-        const unselected = _.filter(this.state.allImages, img => !img.selected);
-        _.forEach(this.state.allImages, img => {
+        const { images, deleteImage } = this.props;
+        _.forEach(images, img => {
             if (img.selected) {
-                axios.delete(`http://localhost:3010/images/${img.id}`)
-                    .catch(e => console.log(e));
+                deleteImage(img);
             }
         });
-        this.setImages(unselected);
     };
 
-    render() {
-        const { allImages, images, clicked } = this.state;
+    componentDidUpdate() {
+        if (!this.state.loaded) {
+            if (!_.isEmpty(this.props.images)) {
+                this.setState({ loaded: true })
+            }
+        }
+    }
 
-        const numberSelected = _.filter(allImages, img => img.selected).length;
+    render() {
+        const { loaded, clicked } = this.state;
+        const { images } = this.props;
+
+        const numberSelected = _.filter(images, img => img.selected).length;
         return (
             <div style={{ ...styles.container, ...this.props.styles }}>
                 {
-                    _.isEmpty(allImages) ?
+                    !loaded ?
                         <div className="content" style={{ ...styles.content, justifyContent: 'center' }}>
                             <CircularProgress/>
                         </div> :
@@ -109,13 +94,12 @@ class Highlights extends Component {
                                 style={{ marginTop: 8 }}
                             />
                             <Modal
-                                className="content"
                                 open={clicked}
                                 onClose={this.handleModalClose}
                             >
                                 {
                                     clicked &&
-                                    <ImageView image={allImages[clicked]} handleModalClose={this.handleModalClose} />
+                                    <ImageView image={images[clicked]} handleModalClose={this.handleModalClose} />
                                 }
                             </Modal>
                         </div>
@@ -141,18 +125,16 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
-    },
-    paper: {
-        position: 'absolute',
-        maxWidth: '60%',
-        maxHeight: '80vh',
-        backgroundColor: '#EEE',
-        boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)',
-        padding: '16px 24px',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-    },
+    }
 };
 
-export default withStyles(styles)(Highlights);
+const mapStateToProps = ({ images }) => {
+    return ({
+        images
+    });
+};
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, actions)
+)(Highlights);

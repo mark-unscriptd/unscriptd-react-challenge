@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import className from 'classnames';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
 import { IconButton, TextField } from 'material-ui';
 import { withStyles } from 'material-ui/styles';
 import { Close } from 'material-ui-icons';
+import * as actions from '../actions';
 
 class ImageView extends Component {
 
@@ -28,7 +32,10 @@ class ImageView extends Component {
 
     setEditMode = () => this.setState({ editMode: true });
 
-    setContentMode = () => {
+    setContentMode = async () => {
+        const { image, form } = this.state;
+        const { updateImage } = this.props;
+        await updateImage({ ...image, ...form });
         this.setState({ editMode: false });
     };
 
@@ -72,10 +79,10 @@ class ImageView extends Component {
         const { image: { title, artist, caption } } = this.props;
         return (
             <div>
-                <h1 style={{ lineHeight: 1 }}>{title}</h1>
+                <h1 style={{ lineHeight: 1, fontSize: '200%' }}>{title}</h1>
                 <p style={{ color: '#AAA' }}>{`by ${artist}`}</p>
                 <p style={{ marginTop: 8 }}>{caption}</p>
-                <div onClick={this.setEditMode}>
+                <div onClick={this.setEditMode} style={{ marginTop: 8 }}>
                     <span className="link">Edit</span>
                 </div>
             </div>
@@ -90,29 +97,30 @@ class ImageView extends Component {
         const { editMode, image } = this.state;
         const { classes, handleModalClose } = this.props;
         return (
-            <div className={classes.paper}>
+            <div className={className(classes.paper, "modalPaper")}>
                 <IconButton
                     onClick={handleModalClose}
                     style={{
-                        position: 'absolute',
+                        position: 'fixed',
+                        zIndex: 80,
                         top: 0,
                         right: 0
                     }}
                 >
                     <Close />
                 </IconButton>
-                <div style={{ display: 'flex' }}>
-                    <img
-                        alt={`Image`}
-                        src={image.display_sizes[0].uri}
-                    />
-                    <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 16 }}>
-                        {
-                            editMode ?
-                                this.renderEditForm() :
-                                this.renderContent()
-                        }
-                    </div>
+                <img
+                    className="imageViewImage"
+                    alt={`Image`}
+                    src={image.display_sizes[0].uri}
+                    style={{ minWidth: 280, width: '100%', maxHeight: '50vh', objectFit: 'contain', backgroundColor: '#000' }}
+                />
+                <div className="imageViewDetail" style={{ marginTop: 16, minWidth: 280 }}>
+                    {
+                        editMode ?
+                            this.renderEditForm() :
+                            this.renderContent()
+                    }
                 </div>
             </div>
         );
@@ -122,15 +130,26 @@ class ImageView extends Component {
 const styles = {
     paper: {
         position: 'absolute',
-        maxWidth: '60%',
-        maxHeight: '80vh',
+        width: '90vw',
+        maxHeight: '90vh',
+        overflowY: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
         backgroundColor: '#EEE',
         boxShadow: '0 2px 10px 0 rgba(0,0,0,0.3)',
-        padding: '16px 24px',
+        padding: '16px 48px',
         top: '50%',
         left: '50%',
-        transform: 'translate(-50%, -50%)'
+        transform: 'translate(-50%, -50%)',
+        transition: 'all 0.2s ease-in-out'
     }
 };
 
-export default withStyles(styles)(ImageView);
+const mapStateToProps = ({ images }) => ({
+    images
+});
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, actions)
+)(ImageView);
