@@ -40,3 +40,15 @@ API can be launched using `npm start`. You will need to run `npm install` once s
 
 More info about API usage can be found at the [json-server
 repo](https://github.com/typicode/json-server).
+
+## React App Usage
+
+Server and App can be launched by running `npm start`. You will need to run `npm install` once to install the project dependencies.
+
+Features:
+1. Shows thumbnails
+2. ImageView, which is a modal
+3. Ability to edit title, artist and caption
+4. Search functionality
+5. Images are selectable and delete-able. Inspired by iOS
+6. Lots of modern animations, scroll and hover effects

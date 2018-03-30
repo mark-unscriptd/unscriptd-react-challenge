@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+}
+
+.hoverable {
+    transition: all 0.2s ease-in-out;
+}
+
+.hoverable:hover {
+    transform: scale(1.1);
+}
+
+.image {
+    opacity: 0.8;
+    transition: all 0.2s ease-in-out;
+}
+
+.image:hover {
+    opacity: 1;
+}
+
+.link {
+    text-decoration: none;
+    color: #0066ff !important;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+
+.link:hover {
+    color: darkblue !important;
+    text-decoration: underline !important;
+}
+
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+
+    .content {
+        width: 90% !important;
+    }
+
+    .heading {
+        font-size: 20px !important;
+    }
+
+    .gameTitle {
+        font-size: 28px !important;
+    }
+
+    .highlightsHeading {
+        font-size: 20px !important;
+        margin-top: 32px !important;
+    }
+
+    .scrollButton {
+        margin-top: 8px !important;
+        max-width: 64px !important;
+        max-height: 64px !important;
+    }
+
+    svg {
+        max-width: 48px !important;
+        max-height: 48px !important;
+    }
+
+    .socialButton {
+        width: 32px !important;
+        height: 32px !important;
+    }
+}
+
+@media only screen and (min-width : 480px) and (max-width : 768px) {
+
+    .content {
+        width: 80% !important;
+    }
+
+    .heading {
+        font-size: 28px !important;
+    }
+
+    .gameTitle {
+        font-size: 40px !important;
+    }
+
+    .highlightsHeading {
+        font-size: 24px !important;
+        margin-top: 32px !important;
+    }
+
+    .scrollButton {
+        margin-top: 8px !important;
+        max-width: 64px !important;
+        max-height: 64px !important;
+    }
+
+    svg {
+        max-width: 48px !important;
+        max-height: 48px !important;
+    }
+}
+
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+    .content {
+        width: 80% !important;
+    }
+
+    .heading {
+        font-size: 32px !important;
+    }
+
+    .gameTitle {
+        font-size: 44px !important;
+    }
+
+    .highlightsHeading {
+        font-size: 28px !important;
+        margin-top: 32px !important;
+    }
+
+    .scrollButton {
+        margin-top: 8px !important;
+        max-width: 72px !important;
+        max-height: 72px !important;
+    }
+
+    svg {
+        max-width: 54px !important;
+        max-height: 54px !important;
+    }
+}
+
+@media only screen and (min-width : 1024px) {
+
+    .modalPaper {
+        width: 60vw !important;
+    }
+
+}
